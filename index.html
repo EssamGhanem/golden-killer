@@ -9,7 +9,7 @@
 *{box-sizing:border-box}
 html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#000;color:var(--ink);font-family:Georgia,"Times New Roman",serif}
 button{font:inherit;color:inherit}
-canvas.webgl{position:fixed;inset:0;display:block}
+canvas.webgl{position:fixed;inset:0;display:block;touch-action:none}
 #vig{position:fixed;inset:0;pointer-events:none;background:radial-gradient(ellipse at 50% 45%,transparent 28%,rgba(0,0,0,.6) 68%,#000 100%)}
 #ui{position:fixed;inset:0;pointer-events:none}
 header{position:absolute;top:0;left:0;right:0;padding:13px 20px;background:linear-gradient(#000e,#0000);display:flex;align-items:center;justify-content:space-between;gap:16px;pointer-events:auto}
@@ -54,11 +54,21 @@ button.ctrl.active{border-color:#6e2a22;color:#d9a866}
 #toast{position:absolute;left:50%;bottom:40px;transform:translate(-50%,8px);background:rgba(8,7,6,.94);border:1px solid #3a2e22;color:#d8c9a8;padding:7px 12px;font:11px Arial,sans-serif;opacity:0;transition:.25s;pointer-events:none}
 #toast.show{opacity:1;transform:translate(-50%,0)}
 @media(max-width:720px){
- header{flex-direction:column;align-items:flex-start;padding:10px}.toolbar{justify-content:flex-start}
- #sceneNav{top:110px}#legend{display:none}
+ header{flex-direction:column;align-items:stretch;gap:8px;padding:10px 10px 6px}
+ .brand span.quote{display:none}
+ .toolbar{flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start;scrollbar-width:none;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;padding-bottom:2px}
+ .toolbar::-webkit-scrollbar{display:none}
+ .toolbar>*{flex:none}
+ .toolbar button.ctrl{padding:9px 11px;min-height:36px;white-space:nowrap}
+ .toolbar button.ctrl b{display:none}
+ #volumePopover{position:fixed;top:84px;right:10px;left:auto;width:min(230px,calc(100vw - 20px))}
+ #sceneNav{top:104px}#sceneNav button{width:34px;height:34px}
+ #legend{display:none}
  #panel{top:auto;bottom:40px;right:8px;transform:translateY(10px);max-height:62vh}#panel.open{transform:translateY(0)}
+ #panel button.ctrl{min-height:40px}
  #focusImage{height:140px}
- #volumePopover{right:auto;left:0}
+ .thumb{height:60px}
+ .inside{overflow-y:auto}
 }
 
 .brand span.quote{font:italic 13px Georgia,serif;letter-spacing:.02em;color:#8a7e69;margin-top:6px}
@@ -106,7 +116,7 @@ button.ctrl b{display:inline-block;min-width:20px;margin-right:7px;padding:1px 5
  </div>
  <div class="cover"><div class="face front"><span class="tag">CALIFORNIA · CASE FILE</span><div class="lbl"><small>CASE No. 1974-2018</small><strong>THE GOLDEN STATE KILLER</strong><small>CONFIDENTIAL</small></div><span class="tag">OPEN THE FILE</span><div class="stamp">UNSOLVED</div></div>
  <div class="face back paper"><h3>EVIDENCE INDEX</h3><ul><li>1974 · Visalia · break-ins begin</li><li>1976 · Rancho Cordova · a new series</li><li>2001 · DNA links the cases</li><li>2018 · Genealogy, then arrest</li><li>2020 · Guilty plea</li></ul><p><i>“Some cases are never closed. They wait.”</i></p></div></div>
-</div><div class="hint">CLICK THE FILE TO OPEN IT</div></div></div>
+</div><div class="hint" id="introHint">CLICK THE FILE TO OPEN IT</div></div></div>
 <canvas class="webgl" id="gl"></canvas>
 <div id="vig"></div>
 <div id="ui">
@@ -171,11 +181,21 @@ const SPOTS=[[-10,4.6],[-4.8,5.2],[1.1,4.7],[8.4,4.4],[11.2,.4],[5.2,.1],[-1.5,-
 const W=innerWidth,H=innerHeight;
 const canvas=document.getElementById("gl");
 const renderer=new THREE.WebGLRenderer({canvas:canvas,antialias:true});
-renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.setSize(W,H);
+renderer.setPixelRatio(Math.min(devicePixelRatio,matchMedia("(pointer:coarse)").matches?1.5:2));renderer.setSize(W,H);
 renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
 renderer.outputEncoding=THREE.sRGBEncoding;
 const world=new THREE.Scene();world.background=new THREE.Color(0x000000);world.fog=new THREE.FogExp2(0x000000,.024);
 const camera=new THREE.PerspectiveCamera(46,W/H,.1,180);camera.position.set(0,0,23);
+/* portrait phones: wider lens and pulled-back overview so the whole board fits; wide screens keep 46° and z=23 */
+let PORTRAIT=false,HOME_Z=23;
+function fitCamera(){
+ const a=innerWidth/innerHeight;PORTRAIT=a<1;
+ const vt=PORTRAIT?Math.min(.84,.4245/a):.4245;
+ camera.aspect=a;camera.fov=2*Math.atan(vt)*180/Math.PI;camera.updateProjectionMatrix();
+ HOME_Z=PORTRAIT?Math.min(31,Math.max(23,12/(vt*a))):23;
+ world.fog.density=PORTRAIT?.016:.024;
+}
+fitCamera();
 
 const ambient=new THREE.AmbientLight(0x2b2118,CFG.ambient);world.add(ambient);
 const cold=new THREE.DirectionalLight(0x2a3850,.1);cold.position.set(-9,10,12);world.add(cold);
@@ -500,7 +520,7 @@ function focusScene(i,j,fromTour,cb){
  const same=active===i;active=i;const p=stacks[i].home;
  if(!same){
   const wasOverview=true;
-  targetPos.set(p.x+2.1,p.y+.2,p.z+8.4);targetLook.set(p.x+2.1,p.y,p.z);tweenCamera(1.7);
+  const ox=PORTRAIT?0:2.1,oy=PORTRAIT?-3.1:0;targetPos.set(p.x+ox,p.y+.2+oy,p.z+8.4);targetLook.set(p.x+ox,p.y+oy,p.z);tweenCamera(1.7);
   lampGoal.pos.set(p.x-1.8,p.y+4.4,p.z+6.4);lampGoal.target.set(p.x,p.y,p.z);
   if(wasOverview&&lampEnergy<.3)lampStart=performance.now()*.001;
   stacks.forEach((s,k)=>{s.shade=k===i?1:CFG.dimCards});
@@ -512,7 +532,7 @@ function focusScene(i,j,fromTour,cb){
 }
 function overview(){
  stopTour();stopSfx();
- active=-1;targetPos.set(0,0,23);targetLook.set(0,0,0);tweenCamera(1.7);
+ active=-1;targetPos.set(0,0,HOME_Z);targetLook.set(0,0,0);tweenCamera(1.7);
  lampGoal.pos.set(0,6,9);lampGoal.target.set(0,0,0);
  document.getElementById("panel").classList.remove("open");
  stacks.forEach(s=>{s.shade=CFG.overviewCards});
@@ -572,13 +592,25 @@ function enterRoom(){
  setTimeout(()=>intro.remove(),1700);
 }
 $("folder").onclick=openFile;
+if(matchMedia("(pointer:coarse)").matches)$("introHint").textContent="TAP THE FILE TO OPEN IT";
 $("enterBtn").onclick=e=>{e.stopPropagation();enterRoom()};
 
-renderer.domElement.addEventListener("pointerdown",e=>{drag=true;moved=false;lx=e.clientX;ly=e.clientY});
-addEventListener("pointerup",()=>{drag=false});
+const ptrs=new Map();let pinchD=0,ptype="mouse";
+renderer.domElement.addEventListener("pointerdown",e=>{
+ ptype=e.pointerType;ptrs.set(e.pointerId,{x:e.clientX,y:e.clientY});
+ if(ptrs.size===2){const[a,b]=[...ptrs.values()];pinchD=Math.hypot(a.x-b.x,a.y-b.y);moved=true}
+ else{drag=true;moved=false;lx=e.clientX;ly=e.clientY}
+});
+addEventListener("pointerup",e=>{ptrs.delete(e.pointerId);if(ptrs.size===0)drag=false;else if(ptrs.size===1){const q=[...ptrs.values()][0];lx=q.x;ly=q.y}});
+addEventListener("pointercancel",e=>{ptrs.delete(e.pointerId);if(ptrs.size===0)drag=false});
 addEventListener("pointermove",e=>{
+ const p=ptrs.get(e.pointerId);if(p){p.x=e.clientX;p.y=e.clientY}
+ if(ptrs.size===2){
+  if(active<0){const[a,b]=[...ptrs.values()],d=Math.hypot(a.x-b.x,a.y-b.y);if(pinchD>0&&d>0)targetPos.z=Math.max(15,Math.min(31,targetPos.z*pinchD/d));pinchD=d}
+  return;
+ }
  if(!drag||active>=0)return;
- const dx=e.clientX-lx,dy=e.clientY-ly;if(Math.abs(dx)+Math.abs(dy)>2)moved=true;
+ const dx=e.clientX-lx,dy=e.clientY-ly;if(Math.abs(dx)+Math.abs(dy)>(ptype==="touch"?10:2))moved=true;
  yaw+=dx*.0025;pitch=Math.max(-.35,Math.min(.35,pitch+dy*.0018));lx=e.clientX;ly=e.clientY;
 });
 renderer.domElement.addEventListener("click",e=>{
@@ -604,7 +636,7 @@ addEventListener("keydown",e=>{
  else if(k==="o")toggleLights();else if(k==="t")startTour();else if(k==="m")toggleSound();
  else if(k==="r")toggleThreads();else if(k==="n")toggleFacts();else if(k==="s")shuffle();
 });
-addEventListener("resize",()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight)});
+addEventListener("resize",()=>{fitCamera();renderer.setSize(innerWidth,innerHeight);if(active<0)targetPos.z=HOME_Z});
 
 /* ---------- LOOP ---------- */
 let last=performance.now()*.001;
