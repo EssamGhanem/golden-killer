@@ -2,127 +2,1248 @@
   "scenes": [
     {
       "text": "A resident returns to find her home disturbed. Similar reports begin to accumulate across town. This opening resident is a composite character, not a named historical victim.",
-      "scene": "s01-1"
+      "scene": "s01-1",
+      "delay": {
+        "image": 0,
+        "video": 2,
+        "sound": 0.5
+      }
     },
     {
       "text": "Drawers left open, a bedroom no longer her own — the intruder's absence leaves only questions, not answers. Imagined for the board; not a documented photograph.",
-      "scene": "s01-2"
+      "scene": "s01-2",
+      "delay": {
+        "image": 0,
+        "video": 2,
+        "sound": 0
+      }
     },
     {
       "text": "Between April 1974 and the end of 1975, Visalia police investigated more than one hundred residential burglaries. The offender later became known as the Visalia Ransacker.",
       "scene": "s02-1",
-      "caption": "Visalia area map"
+      "caption": "Visalia area map",
+      "delay": {
+        "image": 0,
+        "video": 2,
+        "sound": 0
+      }
     },
     {
       "text": "Investigators connect the locations on the map, tracing reports, fingerprints, and footprints. The pattern is local — but the offender's identity remains unknown.",
       "scene": "s02-2",
-      "caption": "Case notes and reports"
+      "caption": "Case notes and reports",
+      "delay": {
+        "image": 0,
+        "video": 0,
+        "sound": 1
+      }
     },
     {
       "text": "Outside, the city seems calm. Inside, residents' sense of home changes: Did I lock the door? Was someone near the window?",
       "scene": "s02-3",
-      "caption": "Neighborhood at night"
+      "caption": "Neighborhood at night",
+      "delay": {
+        "image": 0,
+        "video": 0,
+        "sound": 1
+      }
     },
     {
       "text": "In the Snelling family home, sixteen-year-old Beth wakes to find a man trying to take her from the house. Her father, Claude Snelling, rushes to help her. The attacker shoots him and flees.",
-      "scene": "s03-1"
+      "scene": "s03-1",
+      "delay": {
+        "image": 0,
+        "video": 2,
+        "sound": 0
+      }
     },
     {
       "text": "Afterward: an open door, a family waiting for news from the hospital, and detectives trying to understand how a series of break-ins turned into murder.",
-      "scene": "s03-2"
+      "scene": "s03-2",
+      "delay": {
+        "image": 0,
+        "video": 0,
+        "sound": 1.5
+      }
     },
     {
       "text": "This is the first known murder in the Visalia series. Snelling was a college professor, killed after intervening to thwart an attempt to abduct his daughter. DeAngelo later admitted to the killing.",
-      "scene": "s03-3"
+      "scene": "s03-3",
+      "delay": {
+        "image": 0,
+        "video": 2,
+        "sound": 0
+      }
     },
     {
       "text": "In December 1975, Detective Bill McGowen lies in wait at a location where he expects the perpetrator to return. The man does return. The detective confronts him.",
       "scene": "s04-1",
-      "caption": "A stakeout in the dark"
+      "caption": "A stakeout in the dark",
+      "delay": {
+        "image": 0,
+        "video": 2,
+        "sound": 0
+      }
     },
     {
       "text": "The suspect fires at the detective's flashlight and escapes. McGowen came close to catching him, but the Visalia Ransacker remained unidentified for decades.",
       "scene": "s04-2",
-      "caption": "A damaged flashlight · symbolic"
+      "caption": "A damaged flashlight · symbolic",
+      "delay": {
+        "image": 0,
+        "video": 2,
+        "sound": 0
+      }
     },
     {
       "text": "Months later, a series of attacks begins in the Sacramento area. The first known victim in this new series is attacked in her home. Police discover the incident is not isolated.",
-      "scene": "s05-1"
+      "scene": "s05-1",
+      "delay": {
+        "image": 0,
+        "video": 2,
+        "sound": 0
+      }
     },
     {
       "text": "The attacks spread across Northern California neighborhoods. Investigators begin treating them as a single series and give it the name the public will come to know: the East Area Rapist.",
-      "scene": "s05-2"
+      "scene": "s05-2",
+      "delay": {
+        "image": 0,
+        "video": 2,
+        "sound": 0
+      }
     },
     {
       "text": "The nickname was assigned by investigators and the press; it was not the offender's known name. Detectives do not yet know the East Area Rapist may be the same person as the Visalia Ransacker.",
-      "scene": "s05-3"
+      "scene": "s05-3",
+      "delay": {
+        "image": 0,
+        "video": 2,
+        "sound": 0
+      }
     },
     {
       "text": "In 1994, cold case investigator Paul Holes becomes acquainted with the case. Before him is not a killer's name, but separate files, victims in different cities, and evidence collected before DNA testing.",
       "scene": "s06-1",
-      "caption": "Holes reviewing case files · dramatization"
+      "caption": "Holes reviewing case files · dramatization",
+      "delay": {
+        "image": 0,
+        "video": 2,
+        "sound": 0
+      }
     },
     {
       "text": "In 2001, DNA comparison helps link the East Area Rapist series to murders in Southern California. Investigators now have proof the cases are connected — but still no name.",
       "scene": "s06-2",
-      "caption": "DNA comparison · symbolic"
+      "caption": "DNA comparison · symbolic",
+      "delay": {
+        "image": 0,
+        "video": 2,
+        "sound": 0
+      }
     },
     {
       "text": "For Holes, the puzzle changes. The question is no longer only 'Who committed these crimes?' but also 'How do we bring all these cases into one file?'",
       "scene": "s06-3",
-      "caption": "California case map"
+      "caption": "California case map",
+      "delay": {
+        "image": 0,
+        "video": 2,
+        "sound": 0
+      }
     },
     {
       "text": "Years pass. No direct match comes from criminal DNA databases. A new path emerges: genetic genealogy. Instead of waiting for the perpetrator's own match, the team looks for distant genetic relatives.",
       "scene": "s07-1",
-      "caption": "A family tree · illustrative"
+      "caption": "A family tree · illustrative",
+      "delay": {
+        "image": 0,
+        "video": 2,
+        "sound": 0
+      }
     },
     {
       "text": "Genealogy expert Barbara Rae-Venter joins the work, reviewing family connections and records while detectives test possibilities. The tree is a map of probabilities — not a confession, not a verdict.",
       "scene": "s07-2",
-      "caption": "A laboratory comparison · symbolic"
+      "caption": "A laboratory comparison · symbolic",
+      "delay": {
+        "image": 0,
+        "video": 2,
+        "sound": 0
+      }
     },
     {
       "text": "DNA is collected from an item DeAngelo left in a public place and compared with evidence preserved from the crimes. A match comes back. The genealogical lead still had to be verified with independent evidence.",
       "scene": "s08-1",
-      "caption": "A suburban home at dusk"
+      "caption": "A suburban home at dusk",
+      "delay": {
+        "image": 0,
+        "video": 2,
+        "sound": 0
+      }
     },
     {
       "text": "On April 24, 2018, Joseph James DeAngelo — a former police officer — is arrested at his home in Citrus Heights. After decades, the criminal has a name.",
       "scene": "s08-2",
-      "caption": "Evidence bag · illustrative"
+      "caption": "Evidence bag · illustrative",
+      "delay": {
+        "image": 0,
+        "video": 2,
+        "sound": 0
+      }
     },
     {
       "text": "After decades, the criminal had a name. But his name did not explain why he started, why he continued, or why his known crimes stopped after 1986.",
       "scene": "s08-3",
-      "caption": "Case file marked 2018"
+      "caption": "Case file marked 2018",
+      "delay": {
+        "image": 0,
+        "video": 2,
+        "sound": 0
+      }
     },
     {
       "text": "DeAngelo had worked as a police officer in Exeter and then Auburn, and was fired from the Auburn police department in 1979 after a shoplifting conviction.",
-      "scene": "s09-1"
+      "scene": "s09-1",
+      "delay": {
+        "image": 0,
+        "video": 2,
+        "sound": 0
+      }
     },
     {
       "text": "Later he worked for years at a distribution center, married, and started a family. A normal-looking life is not evidence of motive or innocence.",
-      "scene": "s09-2"
+      "scene": "s09-2",
+      "delay": {
+        "image": 0,
+        "video": 2,
+        "sound": 0
+      }
     },
     {
       "text": "These details reveal the paradox of the investigation: the man the police were hunting was living in the middle of society, while his name remained absent from the crime files.",
-      "scene": "s09-3"
+      "scene": "s09-3",
+      "delay": {
+        "image": 0,
+        "video": 2,
+        "sound": 0
+      }
     },
     {
       "text": "In court, DeAngelo pleads guilty to 13 murders and 13 kidnapping charges connected to the burglaries, and admits to additional crimes.",
       "scene": "s10-1",
-      "caption": "Courtroom · illustrative"
+      "caption": "Courtroom · illustrative",
+      "delay": {
+        "image": 0,
+        "video": 2,
+        "sound": 0
+      }
     },
     {
       "text": "The scope of the crimes and their impact on victims and their families are described before the court. In August 2020, he is sentenced to life in prison without the possibility of parole.",
       "scene": "s10-2",
-      "caption": "Empty courtroom seats"
+      "caption": "Empty courtroom seats",
+      "delay": {
+        "image": 0,
+        "video": 2,
+        "sound": 0
+      }
     },
     {
       "text": "The case was closed with a name and a confession. But why it all began remained a question without a certain answer.",
       "scene": "s10-3",
-      "caption": "California case timeline"
+      "caption": "California case timeline",
+      "delay": {
+        "image": 0,
+        "video": 2,
+        "sound": 0
+      }
+    }
+  ],
+  "effects": [
+    {
+      "card": "s02-1",
+      "effect": "lightning",
+      "delay": 2,
+      "repeat": 1,
+      "repeatMin": 1,
+      "repeatMax": 2,
+      "repeatGap": 1,
+      "options": {
+        "duration": 2
+      }
+    },
+    {
+      "card": "s03-2",
+      "effect": "bloodScreen",
+      "delay": 3,
+      "repeat": 0,
+      "repeatMin": 1,
+      "repeatMax": 1,
+      "repeatGap": 0,
+      "options": {
+        "shake": true
+      }
+    },
+    {
+      "card": "s03-2",
+      "effect": "bloodCard",
+      "delay": 4,
+      "repeat": 0,
+      "repeatMin": 1,
+      "repeatMax": 1,
+      "repeatGap": 0,
+      "options": {
+        "duration": 6
+      }
+    },
+    {
+      "card": "s04-2",
+      "effect": "lightning",
+      "delay": 0,
+      "repeat": 0,
+      "repeatMin": 1,
+      "repeatMax": 1,
+      "repeatGap": 0,
+      "options": {
+        "duration": 6
+      }
+    },
+    {
+      "card": "s01-1",
+      "effect": "lightning",
+      "enabled": false,
+      "delay": 0,
+      "repeat": 0,
+      "repeatMin": 1,
+      "repeatMax": 1,
+      "repeatGap": 0,
+      "options": {
+        "duration": 10
+      }
+    },
+    {
+      "card": "s01-1",
+      "effect": "bloodScreen",
+      "enabled": false,
+      "delay": 0,
+      "repeat": 0,
+      "repeatMin": 1,
+      "repeatMax": 1,
+      "repeatGap": 0,
+      "options": {
+        "shake": false
+      }
+    },
+    {
+      "card": "s01-1",
+      "effect": "bloodCard",
+      "enabled": false,
+      "delay": 0,
+      "repeat": 0,
+      "repeatMin": 1,
+      "repeatMax": 1,
+      "repeatGap": 0,
+      "options": {
+        "duration": 6
+      }
+    },
+    {
+      "card": "s01-2",
+      "effect": "lightning",
+      "enabled": false,
+      "delay": 0,
+      "repeat": 0,
+      "repeatMin": 1,
+      "repeatMax": 1,
+      "repeatGap": 0,
+      "options": {
+        "duration": 10
+      }
+    },
+    {
+      "card": "s01-2",
+      "effect": "bloodScreen",
+      "enabled": false,
+      "delay": 0,
+      "repeat": 0,
+      "repeatMin": 1,
+      "repeatMax": 1,
+      "repeatGap": 0,
+      "options": {
+        "shake": false
+      }
+    },
+    {
+      "card": "s01-2",
+      "effect": "bloodCard",
+      "enabled": false,
+      "delay": 0,
+      "repeat": 0,
+      "repeatMin": 1,
+      "repeatMax": 1,
+      "repeatGap": 0,
+      "options": {
+        "duration": 6
+      }
+    },
+    {
+      "card": "s02-2",
+      "effect": "lightning",
+      "enabled": false,
+      "delay": 0,
+      "repeat": 0,
+      "repeatMin": 1,
+      "repeatMax": 1,
+      "repeatGap": 0,
+      "options": {
+        "duration": 10
+      }
+    },
+    {
+      "card": "s02-2",
+      "effect": "bloodScreen",
+      "enabled": false,
+      "delay": 0,
+      "repeat": 0,
+      "repeatMin": 1,
+      "repeatMax": 1,
+      "repeatGap": 0,
+      "options": {
+        "shake": false
+      }
+    },
+    {
+      "card": "s02-2",
+      "effect": "bloodCard",
+      "enabled": false,
+      "delay": 0,
+      "repeat": 0,
+      "repeatMin": 1,
+      "repeatMax": 1,
+      "repeatGap": 0,
+      "options": {
+        "duration": 6
+      }
+    },
+    {
+      "card": "s02-3",
+      "effect": "lightning",
+      "enabled": false,
+      "delay": 0,
+      "repeat": 0,
+      "repeatMin": 1,
+      "repeatMax": 1,
+      "repeatGap": 0,
+      "options": {
+        "duration": 10
+      }
+    },
+    {
+      "card": "s02-3",
+      "effect": "bloodScreen",
+      "enabled": false,
+      "delay": 0,
+      "repeat": 0,
+      "repeatMin": 1,
+      "repeatMax": 1,
+      "repeatGap": 0,
+      "options": {
+        "shake": false
+      }
+    },
+    {
+      "card": "s02-3",
+      "effect": "bloodCard",
+      "enabled": false,
+      "delay": 0,
+      "repeat": 0,
+      "repeatMin": 1,
+      "repeatMax": 1,
+      "repeatGap": 0,
+      "options": {
+        "duration": 6
+      }
+    },
+    {
+      "card": "s03-1",
+      "effect": "lightning",
+      "enabled": false,
+      "delay": 0,
+      "repeat": 0,
+      "repeatMin": 1,
+      "repeatMax": 1,
+      "repeatGap": 0,
+      "options": {
+        "duration": 10
+      }
+    },
+    {
+      "card": "s03-1",
+      "effect": "bloodScreen",
+      "enabled": false,
+      "delay": 0,
+      "repeat": 0,
+      "repeatMin": 1,
+      "repeatMax": 1,
+      "repeatGap": 0,
+      "options": {
+        "shake": false
+      }
+    },
+    {
+      "card": "s03-1",
+      "effect": "bloodCard",
+      "enabled": false,
+      "delay": 0,
+      "repeat": 0,
+      "repeatMin": 1,
+      "repeatMax": 1,
+      "repeatGap": 0,
+      "options": {
+        "duration": 6
+      }
+    },
+    {
+      "card": "s03-3",
+      "effect": "lightning",
+      "enabled": false,
+      "delay": 0,
+      "repeat": 0,
+      "repeatMin": 1,
+      "repeatMax": 1,
+      "repeatGap": 0,
+      "options": {
+        "duration": 10
+      }
+    },
+    {
+      "card": "s03-3",
+      "effect": "bloodScreen",
+      "enabled": false,
+      "delay": 0,
+      "repeat": 0,
+      "repeatMin": 1,
+      "repeatMax": 1,
+      "repeatGap": 0,
+      "options": {
+        "shake": false
+      }
+    },
+    {
+      "card": "s03-3",
+      "effect": "bloodCard",
+      "enabled": false,
+      "delay": 0,
+      "repeat": 0,
+      "repeatMin": 1,
+      "repeatMax": 1,
+      "repeatGap": 0,
+      "options": {
+        "duration": 6
+      }
+    },
+    {
+      "card": "s04-1",
+      "effect": "lightning",
+      "enabled": false,
+      "delay": 0,
+      "repeat": 0,
+      "repeatMin": 1,
+      "repeatMax": 1,
+      "repeatGap": 0,
+      "options": {
+        "duration": 10
+      }
+    },
+    {
+      "card": "s04-1",
+      "effect": "bloodScreen",
+      "enabled": false,
+      "delay": 0,
+      "repeat": 0,
+      "repeatMin": 1,
+      "repeatMax": 1,
+      "repeatGap": 0,
+      "options": {
+        "shake": false
+      }
+    },
+    {
+      "card": "s04-1",
+      "effect": "bloodCard",
+      "enabled": false,
+      "delay": 0,
+      "repeat": 0,
+      "repeatMin": 1,
+      "repeatMax": 1,
+      "repeatGap": 0,
+      "options": {
+        "duration": 6
+      }
+    },
+    {
+      "card": "s05-1",
+      "effect": "lightning",
+      "enabled": false,
+      "delay": 0,
+      "repeat": 0,
+      "repeatMin": 1,
+      "repeatMax": 1,
+      "repeatGap": 0,
+      "options": {
+        "duration": 10
+      }
+    },
+    {
+      "card": "s05-1",
+      "effect": "bloodScreen",
+      "enabled": false,
+      "delay": 0,
+      "repeat": 0,
+      "repeatMin": 1,
+      "repeatMax": 1,
+      "repeatGap": 0,
+      "options": {
+        "shake": false
+      }
+    },
+    {
+      "card": "s05-1",
+      "effect": "bloodCard",
+      "enabled": false,
+      "delay": 0,
+      "repeat": 0,
+      "repeatMin": 1,
+      "repeatMax": 1,
+      "repeatGap": 0,
+      "options": {
+        "duration": 6
+      }
+    },
+    {
+      "card": "s05-2",
+      "effect": "lightning",
+      "enabled": false,
+      "delay": 0,
+      "repeat": 0,
+      "repeatMin": 1,
+      "repeatMax": 1,
+      "repeatGap": 0,
+      "options": {
+        "duration": 10
+      }
+    },
+    {
+      "card": "s05-2",
+      "effect": "bloodScreen",
+      "enabled": false,
+      "delay": 0,
+      "repeat": 0,
+      "repeatMin": 1,
+      "repeatMax": 1,
+      "repeatGap": 0,
+      "options": {
+        "shake": false
+      }
+    },
+    {
+      "card": "s05-2",
+      "effect": "bloodCard",
+      "enabled": false,
+      "delay": 0,
+      "repeat": 0,
+      "repeatMin": 1,
+      "repeatMax": 1,
+      "repeatGap": 0,
+      "options": {
+        "duration": 6
+      }
+    },
+    {
+      "card": "s05-3",
+      "effect": "lightning",
+      "enabled": false,
+      "delay": 0,
+      "repeat": 0,
+      "repeatMin": 1,
+      "repeatMax": 1,
+      "repeatGap": 0,
+      "options": {
+        "duration": 10
+      }
+    },
+    {
+      "card": "s05-3",
+      "effect": "bloodScreen",
+      "enabled": false,
+      "delay": 0,
+      "repeat": 0,
+      "repeatMin": 1,
+      "repeatMax": 1,
+      "repeatGap": 0,
+      "options": {
+        "shake": false
+      }
+    },
+    {
+      "card": "s05-3",
+      "effect": "bloodCard",
+      "enabled": false,
+      "delay": 0,
+      "repeat": 0,
+      "repeatMin": 1,
+      "repeatMax": 1,
+      "repeatGap": 0,
+      "options": {
+        "duration": 6
+      }
+    },
+    {
+      "card": "s06-1",
+      "effect": "lightning",
+      "enabled": false,
+      "delay": 0,
+      "repeat": 0,
+      "repeatMin": 1,
+      "repeatMax": 1,
+      "repeatGap": 0,
+      "options": {
+        "duration": 10
+      }
+    },
+    {
+      "card": "s06-1",
+      "effect": "bloodScreen",
+      "enabled": false,
+      "delay": 0,
+      "repeat": 0,
+      "repeatMin": 1,
+      "repeatMax": 1,
+      "repeatGap": 0,
+      "options": {
+        "shake": false
+      }
+    },
+    {
+      "card": "s06-1",
+      "effect": "bloodCard",
+      "enabled": false,
+      "delay": 0,
+      "repeat": 0,
+      "repeatMin": 1,
+      "repeatMax": 1,
+      "repeatGap": 0,
+      "options": {
+        "duration": 6
+      }
+    },
+    {
+      "card": "s06-2",
+      "effect": "lightning",
+      "enabled": false,
+      "delay": 0,
+      "repeat": 0,
+      "repeatMin": 1,
+      "repeatMax": 1,
+      "repeatGap": 0,
+      "options": {
+        "duration": 10
+      }
+    },
+    {
+      "card": "s06-2",
+      "effect": "bloodScreen",
+      "enabled": false,
+      "delay": 0,
+      "repeat": 0,
+      "repeatMin": 1,
+      "repeatMax": 1,
+      "repeatGap": 0,
+      "options": {
+        "shake": false
+      }
+    },
+    {
+      "card": "s06-2",
+      "effect": "bloodCard",
+      "enabled": false,
+      "delay": 0,
+      "repeat": 0,
+      "repeatMin": 1,
+      "repeatMax": 1,
+      "repeatGap": 0,
+      "options": {
+        "duration": 6
+      }
+    },
+    {
+      "card": "s06-3",
+      "effect": "lightning",
+      "enabled": false,
+      "delay": 0,
+      "repeat": 0,
+      "repeatMin": 1,
+      "repeatMax": 1,
+      "repeatGap": 0,
+      "options": {
+        "duration": 10
+      }
+    },
+    {
+      "card": "s06-3",
+      "effect": "bloodScreen",
+      "enabled": false,
+      "delay": 0,
+      "repeat": 0,
+      "repeatMin": 1,
+      "repeatMax": 1,
+      "repeatGap": 0,
+      "options": {
+        "shake": false
+      }
+    },
+    {
+      "card": "s06-3",
+      "effect": "bloodCard",
+      "enabled": false,
+      "delay": 0,
+      "repeat": 0,
+      "repeatMin": 1,
+      "repeatMax": 1,
+      "repeatGap": 0,
+      "options": {
+        "duration": 6
+      }
+    },
+    {
+      "card": "s07-1",
+      "effect": "lightning",
+      "enabled": false,
+      "delay": 0,
+      "repeat": 0,
+      "repeatMin": 1,
+      "repeatMax": 1,
+      "repeatGap": 0,
+      "options": {
+        "duration": 10
+      }
+    },
+    {
+      "card": "s07-1",
+      "effect": "bloodScreen",
+      "enabled": false,
+      "delay": 0,
+      "repeat": 0,
+      "repeatMin": 1,
+      "repeatMax": 1,
+      "repeatGap": 0,
+      "options": {
+        "shake": false
+      }
+    },
+    {
+      "card": "s07-1",
+      "effect": "bloodCard",
+      "enabled": false,
+      "delay": 0,
+      "repeat": 0,
+      "repeatMin": 1,
+      "repeatMax": 1,
+      "repeatGap": 0,
+      "options": {
+        "duration": 6
+      }
+    },
+    {
+      "card": "s07-2",
+      "effect": "lightning",
+      "enabled": false,
+      "delay": 0,
+      "repeat": 0,
+      "repeatMin": 1,
+      "repeatMax": 1,
+      "repeatGap": 0,
+      "options": {
+        "duration": 10
+      }
+    },
+    {
+      "card": "s07-2",
+      "effect": "bloodScreen",
+      "enabled": false,
+      "delay": 0,
+      "repeat": 0,
+      "repeatMin": 1,
+      "repeatMax": 1,
+      "repeatGap": 0,
+      "options": {
+        "shake": false
+      }
+    },
+    {
+      "card": "s07-2",
+      "effect": "bloodCard",
+      "enabled": false,
+      "delay": 0,
+      "repeat": 0,
+      "repeatMin": 1,
+      "repeatMax": 1,
+      "repeatGap": 0,
+      "options": {
+        "duration": 6
+      }
+    },
+    {
+      "card": "s08-1",
+      "effect": "lightning",
+      "enabled": false,
+      "delay": 0,
+      "repeat": 0,
+      "repeatMin": 1,
+      "repeatMax": 1,
+      "repeatGap": 0,
+      "options": {
+        "duration": 10
+      }
+    },
+    {
+      "card": "s08-1",
+      "effect": "bloodScreen",
+      "enabled": false,
+      "delay": 0,
+      "repeat": 0,
+      "repeatMin": 1,
+      "repeatMax": 1,
+      "repeatGap": 0,
+      "options": {
+        "shake": false
+      }
+    },
+    {
+      "card": "s08-1",
+      "effect": "bloodCard",
+      "enabled": false,
+      "delay": 0,
+      "repeat": 0,
+      "repeatMin": 1,
+      "repeatMax": 1,
+      "repeatGap": 0,
+      "options": {
+        "duration": 6
+      }
+    },
+    {
+      "card": "s08-2",
+      "effect": "lightning",
+      "enabled": false,
+      "delay": 0,
+      "repeat": 0,
+      "repeatMin": 1,
+      "repeatMax": 1,
+      "repeatGap": 0,
+      "options": {
+        "duration": 10
+      }
+    },
+    {
+      "card": "s08-2",
+      "effect": "bloodScreen",
+      "enabled": false,
+      "delay": 0,
+      "repeat": 0,
+      "repeatMin": 1,
+      "repeatMax": 1,
+      "repeatGap": 0,
+      "options": {
+        "shake": false
+      }
+    },
+    {
+      "card": "s08-2",
+      "effect": "bloodCard",
+      "enabled": false,
+      "delay": 0,
+      "repeat": 0,
+      "repeatMin": 1,
+      "repeatMax": 1,
+      "repeatGap": 0,
+      "options": {
+        "duration": 6
+      }
+    },
+    {
+      "card": "s08-3",
+      "effect": "lightning",
+      "enabled": false,
+      "delay": 0,
+      "repeat": 0,
+      "repeatMin": 1,
+      "repeatMax": 1,
+      "repeatGap": 0,
+      "options": {
+        "duration": 10
+      }
+    },
+    {
+      "card": "s08-3",
+      "effect": "bloodScreen",
+      "enabled": false,
+      "delay": 0,
+      "repeat": 0,
+      "repeatMin": 1,
+      "repeatMax": 1,
+      "repeatGap": 0,
+      "options": {
+        "shake": false
+      }
+    },
+    {
+      "card": "s08-3",
+      "effect": "bloodCard",
+      "enabled": false,
+      "delay": 0,
+      "repeat": 0,
+      "repeatMin": 1,
+      "repeatMax": 1,
+      "repeatGap": 0,
+      "options": {
+        "duration": 6
+      }
+    },
+    {
+      "card": "s09-1",
+      "effect": "lightning",
+      "enabled": false,
+      "delay": 0,
+      "repeat": 0,
+      "repeatMin": 1,
+      "repeatMax": 1,
+      "repeatGap": 0,
+      "options": {
+        "duration": 10
+      }
+    },
+    {
+      "card": "s09-1",
+      "effect": "bloodScreen",
+      "enabled": false,
+      "delay": 0,
+      "repeat": 0,
+      "repeatMin": 1,
+      "repeatMax": 1,
+      "repeatGap": 0,
+      "options": {
+        "shake": false
+      }
+    },
+    {
+      "card": "s09-1",
+      "effect": "bloodCard",
+      "enabled": false,
+      "delay": 0,
+      "repeat": 0,
+      "repeatMin": 1,
+      "repeatMax": 1,
+      "repeatGap": 0,
+      "options": {
+        "duration": 6
+      }
+    },
+    {
+      "card": "s09-2",
+      "effect": "lightning",
+      "enabled": false,
+      "delay": 0,
+      "repeat": 0,
+      "repeatMin": 1,
+      "repeatMax": 1,
+      "repeatGap": 0,
+      "options": {
+        "duration": 10
+      }
+    },
+    {
+      "card": "s09-2",
+      "effect": "bloodScreen",
+      "enabled": false,
+      "delay": 0,
+      "repeat": 0,
+      "repeatMin": 1,
+      "repeatMax": 1,
+      "repeatGap": 0,
+      "options": {
+        "shake": false
+      }
+    },
+    {
+      "card": "s09-2",
+      "effect": "bloodCard",
+      "enabled": false,
+      "delay": 0,
+      "repeat": 0,
+      "repeatMin": 1,
+      "repeatMax": 1,
+      "repeatGap": 0,
+      "options": {
+        "duration": 6
+      }
+    },
+    {
+      "card": "s09-3",
+      "effect": "lightning",
+      "enabled": false,
+      "delay": 0,
+      "repeat": 0,
+      "repeatMin": 1,
+      "repeatMax": 1,
+      "repeatGap": 0,
+      "options": {
+        "duration": 10
+      }
+    },
+    {
+      "card": "s09-3",
+      "effect": "bloodScreen",
+      "enabled": false,
+      "delay": 0,
+      "repeat": 0,
+      "repeatMin": 1,
+      "repeatMax": 1,
+      "repeatGap": 0,
+      "options": {
+        "shake": false
+      }
+    },
+    {
+      "card": "s09-3",
+      "effect": "bloodCard",
+      "enabled": false,
+      "delay": 0,
+      "repeat": 0,
+      "repeatMin": 1,
+      "repeatMax": 1,
+      "repeatGap": 0,
+      "options": {
+        "duration": 6
+      }
+    },
+    {
+      "card": "s10-1",
+      "effect": "lightning",
+      "enabled": false,
+      "delay": 0,
+      "repeat": 0,
+      "repeatMin": 1,
+      "repeatMax": 1,
+      "repeatGap": 0,
+      "options": {
+        "duration": 10
+      }
+    },
+    {
+      "card": "s10-1",
+      "effect": "bloodScreen",
+      "enabled": false,
+      "delay": 0,
+      "repeat": 0,
+      "repeatMin": 1,
+      "repeatMax": 1,
+      "repeatGap": 0,
+      "options": {
+        "shake": false
+      }
+    },
+    {
+      "card": "s10-1",
+      "effect": "bloodCard",
+      "enabled": false,
+      "delay": 0,
+      "repeat": 0,
+      "repeatMin": 1,
+      "repeatMax": 1,
+      "repeatGap": 0,
+      "options": {
+        "duration": 6
+      }
+    },
+    {
+      "card": "s10-2",
+      "effect": "lightning",
+      "enabled": false,
+      "delay": 0,
+      "repeat": 0,
+      "repeatMin": 1,
+      "repeatMax": 1,
+      "repeatGap": 0,
+      "options": {
+        "duration": 10
+      }
+    },
+    {
+      "card": "s10-2",
+      "effect": "bloodScreen",
+      "enabled": false,
+      "delay": 0,
+      "repeat": 0,
+      "repeatMin": 1,
+      "repeatMax": 1,
+      "repeatGap": 0,
+      "options": {
+        "shake": false
+      }
+    },
+    {
+      "card": "s10-2",
+      "effect": "bloodCard",
+      "enabled": false,
+      "delay": 0,
+      "repeat": 0,
+      "repeatMin": 1,
+      "repeatMax": 1,
+      "repeatGap": 0,
+      "options": {
+        "duration": 6
+      }
+    },
+    {
+      "card": "s10-3",
+      "effect": "lightning",
+      "enabled": false,
+      "delay": 0,
+      "repeat": 0,
+      "repeatMin": 1,
+      "repeatMax": 1,
+      "repeatGap": 0,
+      "options": {
+        "duration": 10
+      }
+    },
+    {
+      "card": "s10-3",
+      "effect": "bloodScreen",
+      "enabled": false,
+      "delay": 0,
+      "repeat": 0,
+      "repeatMin": 1,
+      "repeatMax": 1,
+      "repeatGap": 0,
+      "options": {
+        "shake": false
+      }
+    },
+    {
+      "card": "s10-3",
+      "effect": "bloodCard",
+      "enabled": false,
+      "delay": 0,
+      "repeat": 0,
+      "repeatMin": 1,
+      "repeatMax": 1,
+      "repeatGap": 0,
+      "options": {
+        "duration": 6
+      }
     }
   ],
   "sceneMeta": {
