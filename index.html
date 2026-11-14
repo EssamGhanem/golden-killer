@@ -32,25 +32,6 @@ button.ctrl.active{border-color:#6e2a22;color:#d9a866}
 #sceneNav button:hover,#sceneNav button.active{border-color:#c9a46a;color:#fff;background:#3a2516}
 #legend{position:absolute;left:18px;top:104px;color:#5a5245;font:10px/1.8 Arial,sans-serif;letter-spacing:.07em}
 #status{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);color:#6a6253;font:10px Arial,sans-serif;letter-spacing:.2em;text-transform:uppercase}
-#panel{position:absolute;right:18px;top:50%;transform:translateY(-48%) translateX(16px);width:min(380px,calc(100vw - 28px));max-height:calc(100vh - 150px);overflow:auto;padding:16px;background:var(--panel);border:1px solid #3a2e22;box-shadow:0 20px 60px #000d;pointer-events:auto;opacity:0;visibility:hidden;transition:opacity .3s,transform .4s,visibility .3s}
-#panel.open{opacity:1;visibility:visible;transform:translateY(-50%) translateX(0)}
-.panelTop{display:flex;justify-content:space-between;gap:12px}
-#panel h1{font:700 22px/1.15 Georgia,serif;color:#e8d3a6;margin:0 0 6px}
-#panel .meta{font:10px Arial,sans-serif;letter-spacing:.14em;color:#9a6d3f;text-transform:uppercase}
-#closePanel{border:1px solid #3b3328;background:#0b0a09;color:#a99c86;width:28px;height:28px;cursor:pointer;flex:none}
-#story{font:14px/1.6 Georgia,serif;color:#c9c0ab;margin:12px 0}
-#focusImage{width:100%;height:200px;border:1px solid #5a4a36;background:#100e0c center/cover;position:relative;overflow:hidden}
-#focusImage:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,#050403d0,transparent 55%)}
-#focusCaption{position:absolute;z-index:2;left:10px;right:10px;bottom:8px;color:#efe3c7;font:11px/1.3 Arial,sans-serif}
-#thumbs{display:flex;gap:6px;margin-top:8px}
-.thumb{flex:1;height:54px;padding:0;position:relative;border:1px solid #3e3429;background:#120f0d center/cover;cursor:pointer;overflow:hidden}
-.thumb.selected{border:2px solid var(--gold)}
-.thumb span{position:absolute;left:2px;right:2px;bottom:2px;background:#050403cc;color:#e3d6bb;font:9px Arial,sans-serif;padding:2px 3px;text-align:left}
-#factsBox{margin-top:12px;padding-top:9px;border-top:1px solid #3a3026}
-#factsBox h2{font:10px Arial,sans-serif;letter-spacing:.15em;text-transform:uppercase;color:#9a6d3f;margin:0 0 6px}
-#factsBox p{font:11px/1.45 Arial,sans-serif;color:#8f8674;margin:3px 0}
-.panelControls{display:flex;gap:6px;margin-top:11px}
-.panelControls .ctrl{flex:1}
 #toast{position:absolute;left:50%;bottom:40px;transform:translate(-50%,8px);background:rgba(8,7,6,.94);border:1px solid #3a2e22;color:#d8c9a8;padding:7px 12px;font:11px Arial,sans-serif;opacity:0;transition:.25s;pointer-events:none}
 #toast.show{opacity:1;transform:translate(-50%,0)}
 @media(max-width:720px){
@@ -64,10 +45,6 @@ button.ctrl.active{border-color:#6e2a22;color:#d9a866}
  #volumePopover{position:fixed;top:84px;right:10px;left:auto;width:min(230px,calc(100vw - 20px))}
  #sceneNav{top:104px}#sceneNav button{width:34px;height:34px}
  #legend{display:none}
- #panel{top:auto;bottom:40px;right:8px;transform:translateY(10px);max-height:62vh}#panel.open{transform:translateY(0)}
- #panel button.ctrl{min-height:40px}
- #focusImage{height:140px}
- .thumb{height:60px}
  .inside{overflow-y:auto}
 }
 
@@ -110,7 +87,7 @@ button.ctrl b{display:inline-block;min-width:20px;margin-right:7px;padding:1px 5
  <div class="inside face paper" style="backface-visibility:visible">
   <h3>INVESTIGATION OPENED</h3><h2>The Man Who Had No Name</h2>
   <p>A documentary-drama inspired by the Golden State Killer case.</p>
-  <p><b>Lead investigator:</b> Paul Holes<br><b>Span:</b> 1974 — 2020<br><b>Scenes:</b> 10</p>
+  <p><b>Lead investigator:</b> Paul Holes<br><b>Span:</b> 1974 — 2020<br><b>Scenes:</b> <span id="introScenes">10</span></p>
   <p><i>Note: some characters are composites. Imagined dialogue is not a real quotation.</i></p>
   <button id="enterBtn">ENTER THE BOARD ROOM →</button>
  </div>
@@ -125,6 +102,7 @@ button.ctrl b{display:inline-block;min-width:20px;margin-right:7px;padding:1px 5
   <div class="toolbar" id="toolbar">
     <button class="ctrl" id="overviewBtn"><b>Esc</b><span>Overview</span></button>
     <button class="ctrl active" id="lampBtn"><b>O</b><span>Lights On</span></button>
+    <button class="ctrl" id="keepBtn"><b>K</b><span>Lit Scene · Off</span></button>
     <button class="ctrl" id="tourBtn"><b>T</b><span>Tour</span></button>
     <button class="ctrl active" id="soundBtn"><b>M</b><span>Sound On</span></button>
     <button class="ctrl active" id="threadsBtn"><b>R</b><span>Red Threads</span></button>
@@ -134,15 +112,7 @@ button.ctrl b{display:inline-block;min-width:20px;margin-right:7px;padding:1px 5
   </div>
 </header>
 <button class="ctrl" id="toolbarHint" aria-label="Show toolbar">SHOW CONTROLS · TAB</button>
-<div id="legend">CLICK A CARD TO READ IT · CLICK THE CARD BEHIND TO BRING IT FORWARD<br>DRAG TO LOOK AROUND · SCROLL TO ZOOM<br>← → SCENES</div>
-<div id="panel">
-  <div class="panelTop"><div><div class="meta" id="meta"></div><h1 id="title"></h1></div><button id="closePanel" aria-label="Close">×</button></div>
-  <p id="story"></p>
-  <div id="focusImage"><div id="focusCaption"></div></div>
-  <div id="thumbs"></div>
-  <div id="factsBox"><h2>Case notes</h2><div id="notes"></div></div>
-  <div class="panelControls"><button class="ctrl" id="prevBtn">← Previous</button><button class="ctrl" id="nextBtn">Next →</button></div>
-</div>
+<div id="legend">CLICK A CARD TO READ IT · CLICK THE CARD BEHIND TO BRING IT FORWARD<br>DRAG TO LOOK AROUND · SCROLL TO ZOOM<br>← → CARDS &amp; SCENES</div>
 <div id="status"></div><div id="toast"></div>
 </div>
 
@@ -157,22 +127,37 @@ const CFG = {
   overviewLamp: 2,  // lamp brightness in overview
   ambient: 0.22,      // whole-room base light (lower = darker room)
   dimCards: 0.3,      // unfocused cards: 0 = black, 1 = full brightness
-  overviewCards: 0.4
+  overviewCards: 0.4,
+  CONTENT_URL: "scenes.json"   // the json file that defines the scenes and cards
 };
 
-/* ---------- CONTENT ---------- */
-const SCENES=[
- {title:"The House That Changed",date:"Visalia · April 1974",story:"A resident returns to find her home disturbed. Similar reports begin to accumulate across town. This opening resident is a composite character, not a named historical victim.",images:["A disturbed room · illustrative composite"],notes:["Visalia Police investigated more than 100 residential burglaries between 1974 and 1975.","Several early incidents are only tentatively linked to the same offender."],place:"VISALIA",tone:"#4a3a2a"},
- {title:"A Pattern on the Wall",date:"Visalia · 1974–1975",story:"Investigators map the break-ins and compare reports. The pattern is local, but the offender's identity remains unknown.",images:["Visalia area map","Case notes and reports","Neighborhood at night"],notes:["The offender became known as the Visalia Ransacker.","Police later described a stakeout and an exchange of gunfire with a suspect."],place:"TULARE COUNTY",tone:"#3c3a2c"},
- {title:"The Father Steps In",date:"Visalia · September 11, 1975",story:"Claude Snelling intervenes when an intruder attempts to take his 16-year-old daughter from the family home. Snelling is shot and dies. The attacker escapes.",images:["The Snelling family home · illustration","A quiet street after the crime"],notes:["This is the first known murder associated with the Visalia series.","DeAngelo later admitted killing Claude Snelling."],place:"VISALIA",tone:"#4a2e28"},
- {title:"The Stakeout",date:"Visalia · December 1975",story:"Detective Bill McGowen waits near a home connected to the investigation. When the prowler returns, he fires at the detective's flashlight and escapes.",images:["A stakeout in the dark","A damaged flashlight · symbolic"],notes:["The suspect was not caught in Visalia.","The Ransacker series ended around December 1975."],place:"VISALIA",tone:"#2e2c28"},
- {title:"A New Series",date:"Rancho Cordova · June 18, 1976",story:"The first known attack in the East Area Rapist series begins a new chapter in the case. Investigators do not yet know whether it connects to Visalia.",images:["Rancho Cordova before dawn"],notes:["The East Area Rapist attacks continued across Northern California.","The nickname was assigned by investigators and the press; it was not the offender's known name."],place:"SACRAMENTO COUNTY",tone:"#33382f"},
- {title:"The Case Remains Open",date:"1994 · 2001",story:"Investigator Paul Holes revisits the old evidence. DNA comparisons eventually connect cases that had been treated as separate series.",images:["Holes reviewing case files · dramatization","DNA comparison · symbolic","California case map"],notes:["Holes later said he first encountered the case in 1994.","DNA linked the East Area Rapist and Original Night Stalker series by 2001."],place:"NORTHERN & SOUTHERN CALIFORNIA",tone:"#2c3538"},
- {title:"A Name in the Family Tree",date:"Forensic genetic genealogy · 2017–2018",story:"Investigators and genetic genealogist Barbara Rae-Venter use distant genetic matches and family records to narrow the search. A family tree points toward a candidate, not yet proof.",images:["A family tree · illustrative","A laboratory comparison · symbolic"],notes:["The genealogical lead had to be checked against an independent DNA sample.","Do not treat a generated family tree as a real case document."],place:"CALIFORNIA",tone:"#3a3230"},
- {title:"The Ordinary House",date:"Citrus Heights · April 2018",story:"Investigators collect discarded DNA from Joseph James DeAngelo and compare it with crime-scene evidence. He is arrested on April 24, 2018.",images:["A suburban home at dusk","Evidence bag · illustrative","Case file marked 2018"],notes:["The DNA comparison confirmed the investigative lead.","The suspect's identity becomes public after decades of uncertainty."],place:"CITRUS HEIGHTS",tone:"#303a33"},
- {title:"The Other Life",date:"Auburn · 1970s to 2010s",story:"DeAngelo had worked as a police officer, later held a job in a distribution center, and raised a family. These facts describe his public life; they do not explain his crimes.",images:["Police badge · symbolic","Distribution center · symbolic"],notes:["He was fired from the Auburn Police Department in 1979 after a shoplifting conviction.","A normal-looking life is not evidence of motive or innocence."],place:"AUBURN · SACRAMENTO",tone:"#3b3328"},
- {title:"The Admission",date:"California · June–August 2020",story:"DeAngelo pleads guilty to 13 murders and 13 kidnapping counts, admits additional crimes, and is sentenced to life without parole.",images:["Courtroom · illustrative","Empty courtroom seats","California case timeline"],notes:["The plea gave victims and families a chance to be heard in court.","The identity was solved; the full motive remains unknown."],place:"SACRAMENTO",tone:"#2a2526"}
-];
+/* ---------- CONTENT: loaded from CFG.CONTENT_URL ----------
+   Every "scenes" entry in the json becomes one card (image + sound + text).
+   Entries are grouped into scenes by their scene part: s01-1 and s01-2 belong to scene s01.
+   Optional scene details go in "sceneMeta", keyed by scene: { "s01": { title, date, place, tone } }. */
+let SCENES=[];
+const TONES=["#4a3a2a","#3c3a2c","#4a2e28","#2e2c28","#33382f","#2c3538","#3a3230","#303a33","#3b3328","#2a2526"];
+function parseScenes(json){
+ const meta=(json&&json.sceneMeta)||{},groups=new Map();
+ ((json&&json.scenes)||[]).forEach(item=>{
+  const id=String(item.scene||"").trim(),m=/^(s\d+)-(\d+)$/i.exec(id),text=String(item.text||"").trim();
+  if(!m||!text)return;                       // malformed entries are skipped, the board still builds
+  const key=m[1].toLowerCase();
+  if(!groups.has(key))groups.set(key,[]);
+  groups.get(key).push({id:id,num:Number(m[2]),text:text,caption:item.caption?String(item.caption):""});
+ });
+ return [...groups.keys()].sort((a,b)=>Number(a.slice(1))-Number(b.slice(1))).map((key,i)=>{
+  const info=meta[key]||{};
+  return {
+   key:key,
+   title:info.title||"Scene "+pad2(i+1),
+   date:info.date||"",
+   place:info.place||"",
+   tone:info.tone||TONES[i%TONES.length],
+   cards:groups.get(key).sort((a,b)=>a.num-b.num)
+  };
+ });
+}
 const EXTRA=[[0,3],[1,5],[2,4],[2,8],[3,6],[4,7],[5,8],[6,9],[0,6],[1,8],[3,9]];
 const FACTS=["VISALIA · 1974–1975 · 100+ BURGLARIES","SEP 1975 · CLAUDE SNELLING KILLED","RANCHO CORDOVA · JUNE 1976","DNA LINK · 2001","PAUL HOLES · CASE REVIEW","FORENSIC GENEALOGY · 2018","ARREST · APRIL 24, 2018","GUILTY PLEA · JUNE 2020","LIFE WITHOUT PAROLE · AUG 2020","VISALIA · SACRAMENTO · GOLETA · IRVINE","CASE FILES · 1.3M+ PAGES OF DISCOVERY"];
 const SPOTS=[[-10,4.6],[-4.8,5.2],[1.1,4.7],[8.4,4.4],[11.2,.4],[5.2,.1],[-1.5,-.2],[-9,-.4],[-5.2,-4.8],[4.4,-4.6]];
@@ -279,42 +264,92 @@ function createPhoto(label,index,tone){
  return c;
 }
 function fitFont(g,text,maxW,size,face){let s=size;do{g.font="bold "+s+"px "+face;s--}while(g.measureText(text).width>maxW&&s>14);return s}
-function wrap(g,text,x,y,maxW,lh,maxLines){
- const words=text.split(" ");let line="",yy=y,n=0;
+function wrapLines(g,text,maxW){
+ const words=String(text).split(/\s+/).filter(Boolean),lines=[];let line="";
  for(const w of words){
-  const test=line?line+" "+w:w;
-  if(g.measureText(test).width>maxW&&line){g.fillText(line,x,yy);yy+=lh;n++;line=w;if(maxLines&&n>=maxLines-1)break}
-  else line=test;
+  const t=line?line+" "+w:w;
+  if(g.measureText(t).width>maxW&&line){lines.push(line);line=w}else line=t;
  }
- if(line)g.fillText(line.length>60&&maxLines?line.slice(0,60)+"…":line,x,yy);
+ if(line)lines.push(line);
+ return lines;
+}
+function ellipsize(g,text,maxW){
+ if(g.measureText(text).width<=maxW)return text;
+ let t=text;while(t.length>1&&g.measureText(t+"…").width>maxW)t=t.slice(0,-1);
+ return t.trimEnd()+"…";
 }
 
-/* ---------- YOUR PHOTOS ----------
-   Put files in an "images" folder next to this HTML file, named:
-   s01-1.jpg, s01-2.jpg, s01-3.jpg  (scene 1, image 1..3)
-   ... up to s10-3. jpg, jpeg, png and webp are all accepted. */
+/* ---------- YOUR CARD MEDIA ----------
+   Each json entry, e.g. "s01-1", looks in the images folder for, in this order:
+     images/s01-1.mp4 or .webm           -> video (the focused card plays it, muted; the card's mp3 is the sound)
+     images/s01-1.jpg (.jpeg .png .webp) -> picture
+   Nothing found -> the generated default picture. */
 const PHOTO_DIR="images/";
-const photoCache={};
-function loadPhoto(i,j){
- const key=i+"-"+j;
- if(photoCache[key])return photoCache[key];
- photoCache[key]=new Promise(res=>{
-  const exts=["jpg","jpeg","png","webp"];let k=0;
-  const base=PHOTO_DIR+"s"+String(i+1).padStart(2,"0")+"-"+(j+1);
-  const next=()=>{
-   if(k>=exts.length){res(null);return}
-   const img=new Image();
-   img.onload=()=>{
-    img.tainted=checkTaint(img);
-    if(img.tainted)toast("Open this board through a local server to show images on the cards");
-    res(img);
-   };
-   img.onerror=()=>{k++;next()};
-   img.src=base+"."+exts[k];
+const VIDEO_EXTS=["mp4","webm"],IMAGE_EXTS=["jpg","jpeg","png","webp"];
+function tryUrls(urls,attempt){
+ return urls.reduce((p,u)=>p.then(r=>r||attempt(u)),Promise.resolve(null));
+}
+function tryImage(url){
+ return new Promise(res=>{
+  const img=new Image();
+  img.onload=()=>{
+   img.tainted=checkTaint(img);
+   if(img.tainted){toast("Open this board through a local server to show images on the cards");res(null)}
+   else res(img);
   };
-  next();
+  img.onerror=()=>res(null);
+  img.src=url;
  });
- return photoCache[key];
+}
+function tryVideo(url){
+ return new Promise(res=>{
+  const v=document.createElement("video");
+  v.muted=true;v.loop=true;v.playsInline=true;v.preload="auto";
+  v.onloadeddata=()=>{
+   if(checkTaint(v)){toast("Open this board through a local server to show videos on the cards");res(null)}
+   else res(v);
+  };
+  v.onerror=()=>res(null);
+  v.src=url;
+ });
+}
+function loadMedia(card){
+ const id=card.info.id;
+ return tryUrls(VIDEO_EXTS.map(e=>PHOTO_DIR+id+"."+e),tryVideo)
+  .then(v=>v||tryUrls(IMAGE_EXTS.map(e=>PHOTO_DIR+id+"."+e),tryImage))
+  .then(m=>{
+   if(!m)return;
+   if(m.tagName==="VIDEO"){card.video=m;m.muted=true;m.addEventListener("seeked",()=>paintMedia(card))}else card.photo=m;
+   paintCard(card);
+  });
+}
+/* what goes into the picture area: the video frame, the picture, or the default */
+function mediaSource(card,label,tone){
+ if(card.video)return card.video;
+ if(card.photo)return card.photo;
+ return createPhoto(label,card.st.i+card.j,tone);
+}
+function paintMedia(card){
+ const st=card.st,s=st.data;
+ const src=mediaSource(card,card.info.caption||s.title,s.tone),r=fitRect(src,MEDIA_BOX);
+ card.g.drawImage(src,r.x,r.y,r.w,r.h);
+ card.tex.needsUpdate=true;
+}
+/* the focused card's video starts 2 s after it is focused (muted, looping); leaving the card stops and rewinds it */
+const VIDEO_DELAY=2000;
+function updateVideos(){
+ cards.forEach(c=>{
+  if(!c.video)return;
+  const want=c.st.i===active&&c.j===focusCard;
+  if(want&&!c.playWant){
+   c.playWant=true;
+   c.playTimer=setTimeout(()=>{if(c.playWant)c.video.play().catch(()=>{})},VIDEO_DELAY);
+  }else if(!want&&c.playWant){
+   c.playWant=false;clearTimeout(c.playTimer);
+   c.video.pause();c.video.currentTime=0;
+  }
+  if(!c.video.paused)paintMedia(c);
+ });
 }
 /* ---------- YOUR BACKGROUND IMAGES ----------
    images/floor.jpg  -> floor under the board (falls back to dark wood)
@@ -343,49 +378,64 @@ function checkTaint(img){
  const c=document.createElement("canvas");c.width=1;c.height=1;const g=c.getContext("2d");
  try{g.drawImage(img,0,0);g.getImageData(0,0,1,1);return false}catch(e){return true}
 }
-function drawCover(g,src,x,y,w,h){
- const s=Math.max(w/src.width,h/src.height),dw=src.width*s,dh=src.height*s;
- g.save();g.beginPath();g.rect(x,y,w,h);g.clip();
- g.drawImage(src,x+(w-dw)/2,y+(h-dh)/2,dw,dh);g.restore();
-}
-function setPhotoBg(el,i,j,label,tone){
- el.style.backgroundImage="url("+createPhoto(label,i+j,tone).toDataURL()+")";
- loadPhoto(i,j).then(img=>{if(img)el.style.backgroundImage="url("+img.src+")"});
+/* the picture or video keeps its own shape and fits inside the card's picture box (never cropped, never stretched);
+   smaller pictures stay at their natural size */
+const MEDIA_BOX={x:34,y:98,w:712,h:336};   // 40% taller than before
+const MEDIA_PAD=8;                          // white frame margin around the picture/video
+function fitRect(src,b){
+ const sw=src.videoWidth||src.width,sh=src.videoHeight||src.height;
+ if(!sw||!sh)return {x:b.x,y:b.y,w:b.w,h:b.h};
+ const s=Math.min(1,b.w/sw,b.h/sh),w=sw*s,hh=sh*s;
+ return {x:b.x+(b.w-w)/2,y:b.y+(b.h-hh)/2,w:w,h:hh};
 }
 
-/* ---------- PAPER CARDS ---------- */
+/* ---------- PAPER CARDS: image, caption and the json text, painted on one card ---------- */
 function paintCard(card){
- const c=card.canvas,g=card.g,st=card.st,s=st.data,j=card.j,PW=c.width,PH=c.height;
+ const c=card.canvas,g=card.g,st=card.st,s=st.data,info=card.info,PW=c.width,PH=c.height;
  g.clearRect(0,0,PW,PH);
  const pg=g.createLinearGradient(0,0,PW,PH);pg.addColorStop(0,"#d6c7a0");pg.addColorStop(1,"#a8926a");g.fillStyle=pg;g.fillRect(0,0,PW,PH);
- for(let i=0;i<6;i++){const x=Math.random()*PW,y=Math.random()*PH,r=rnd(40,140);const rg=g.createRadialGradient(x,y,0,x,y,r);rg.addColorStop(0,"rgba(96,62,26,.14)");rg.addColorStop(1,"rgba(96,62,26,0)");g.fillStyle=rg;g.fillRect(0,0,PW,PH)}
- for(let i=0;i<3500;i++){g.fillStyle="rgba(60,40,18,"+Math.random()*.08+")";g.fillRect(Math.random()*PW,Math.random()*PH,1.6,1.6)}
+ for(let i=0;i<6;i++){const x=Math.random()*PW,y=Math.random()*PH,r=rnd(60,180);const rg=g.createRadialGradient(x,y,0,x,y,r);rg.addColorStop(0,"rgba(96,62,26,.14)");rg.addColorStop(1,"rgba(96,62,26,0)");g.fillStyle=rg;g.fillRect(0,0,PW,PH)}
+ for(let i=0;i<5000;i++){g.fillStyle="rgba(60,40,18,"+Math.random()*.08+")";g.fillRect(Math.random()*PW,Math.random()*PH,1.6,1.6)}
  g.strokeStyle="rgba(70,48,22,.55)";g.lineWidth=3;g.strokeRect(12,12,PW-24,PH-24);
 
  g.textAlign="left";g.fillStyle="#1f160d";
- const titleTxt=String(st.i+1).padStart(2,"0")+"  "+s.title.toUpperCase();
+ const titleTxt=pad2(st.i+1)+"  "+s.title.toUpperCase();
  const fs=fitFont(g,titleTxt,PW-80,26,"'Courier New', monospace");
  g.font="bold "+fs+"px 'Courier New', monospace";g.fillText(titleTxt,34,54);
- g.fillStyle="#7a2b1c";g.font="bold 14px 'Courier New', monospace";g.fillText(s.date.toUpperCase(),34,80);
+ if(s.date){g.fillStyle="#7a2b1c";g.font="bold 14px 'Courier New', monospace";g.fillText(s.date.toUpperCase(),34,80)}
 
- g.save();g.translate(PW/2,0);
+ const src=mediaSource(card,info.caption||s.title,s.tone),r=fitRect(src,MEDIA_BOX);
+ g.save();
  g.shadowColor="rgba(0,0,0,.55)";g.shadowBlur=10;g.shadowOffsetY=4;
- g.fillStyle="#efe6cf";g.fillRect(-PW/2+30,92,PW-60,198);
+ g.fillStyle="#efe6cf";g.fillRect(r.x-MEDIA_PAD,r.y-MEDIA_PAD,r.w+2*MEDIA_PAD,r.h+2*MEDIA_PAD);
  g.restore();
- drawCover(g,(card.photo&&!card.photo.tainted)?card.photo:createPhoto(s.images[j],st.i+j,s.tone),34,98,PW-68,184);
+ g.drawImage(src,r.x,r.y,r.w,r.h);
 
- g.fillStyle="#241a10";g.font="bold 13px 'Courier New', monospace";g.fillText(s.place,34,306);
- g.fillStyle="#7a2b1c";g.textAlign="right";g.fillText((j+1)+" / "+st.n,PW-34,306);g.textAlign="left";
+ if(info.caption){g.fillStyle="#1d3560";g.font="italic 18px Georgia";g.textAlign="left";g.fillText(ellipsize(g,info.caption,PW-68),34,462)}
 
- g.fillStyle="#1d3560";g.font="italic 17px Georgia";
- wrap(g,s.images[j],34,332,PW-80,22,2);
+ /* the card's own text (json "text"), sized to fit the lower part of the card */
+ const top=486,maxH=PH-74-top,tw=PW-68;
+ let size=27,lh=0,lines=[];
+ for(;size>=15;size--){
+  g.font=size+"px Georgia";lh=Math.round(size*1.4);
+  lines=wrapLines(g,info.text,tw);
+  if(lines.length*lh<=maxH)break;
+ }
+ size=Math.max(size,15);
+ const maxLines=Math.max(1,Math.floor(maxH/lh));
+ if(lines.length>maxLines){lines=lines.slice(0,maxLines);lines[maxLines-1]=ellipsize(g,lines[maxLines-1],tw)}
+ g.font=size+"px Georgia";g.fillStyle="#241a10";g.textAlign="left";
+ lines.forEach((ln,k)=>g.fillText(ln,34,top+size+k*lh));
+
+ g.fillStyle="#241a10";g.font="bold 13px 'Courier New', monospace";g.fillText(s.place||"",34,PH-34);
+ g.fillStyle="#7a2b1c";g.textAlign="right";g.fillText((card.j+1)+" / "+st.n,PW-34,PH-34);g.textAlign="left";
 
  g.fillStyle="rgba(214,200,160,.7)";
  g.save();g.translate(44,28);g.rotate(-.5);g.fillRect(-18,-8,70,18);g.restore();
  g.save();g.translate(PW-44,28);g.rotate(.45);g.fillRect(-18,-8,70,18);g.restore();
 
  if(st.i===SCENES.length-1){
-  g.save();g.translate(PW/2,PH/2);g.rotate(-.22);
+  g.save();g.translate(PW/2,218);g.rotate(-.22);
   g.strokeStyle="rgba(140,28,28,.7)";g.lineWidth=6;g.strokeRect(-160,-42,320,84);
   g.fillStyle="rgba(140,28,28,.7)";g.font="bold 46px 'Courier New', monospace";g.textAlign="center";g.fillText("CLOSED",0,16);
   g.restore();
@@ -393,55 +443,82 @@ function paintCard(card){
  card.tex.needsUpdate=true;
 }
 
-const stacks=[],cards=[],DX=.32,DY=.2,DZ=.06;
-function rankPos(st,r){return new THREE.Vector3(st.home.x+r*DX,st.home.y+r*DY,st.home.z+(st.n-1-r)*DZ+.02)}
-function applyRanks(st){
- st.order.forEach((j,r)=>{const c=st.cards[j];c.rank=r;c.tp.copy(rankPos(st,r));c.trz=st.tilt+c.jit});
- st.pin.position.copy(rankPos(st,0)).add(new THREE.Vector3(0,1.68,.12));
+/* ---------- CARDS & STACKS ----------
+   Overview: each scene is a deck. Focused scene: the current card sits in the centre, read cards lie on the left,
+   unread cards on the right. Every move is a tween with a lift, so cards travel over each other, never through. */
+const stacks=[],cards=[],DX=.32,DY=.2,DZ=.06,CARD_SIZE={w:4.15,h:3.55},CANVAS_W=780,CANVAS_H=666;
+const SIDE=3.1,PILE_DZ=.03,STAGE_Z=.55,LIFT=.7,PIN_UP=new THREE.Vector3(0,1.68,.12),_pinGoal=new THREE.Vector3();
+function basePos(i){return SPOTS[i]||[rnd(-9,9),rnd(-4.5,4.5)]}
+function shuffledIndices(n){
+ const a=[...Array(n).keys()];
+ for(let i=n-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}
+ return a;
+}
+function deckPos(st,k){return new THREE.Vector3(st.home.x+k*DX,st.home.y+k*DY,st.home.z+(st.n-1-k)*DZ+.02)}
+function spreadPos(st,k){
+ const h=st.home;
+ if(k===st.cur)return new THREE.Vector3(h.x,h.y,h.z+STAGE_Z);
+ if(k<st.cur)return new THREE.Vector3(h.x-SIDE,h.y,h.z+k*PILE_DZ+.02);
+ return new THREE.Vector3(h.x+SIDE,h.y,h.z+(st.n-1-k)*PILE_DZ+.02);
+}
+function restRot(st,c){return st.tilt+c.jit}
+function spreadRot(st,k,c){return k===st.cur?0:(k<st.cur?-.05:.05)+c.jit*.5}
+/* o = null: place instantly. Otherwise tween every card whose target changed. */
+function layoutScene(st,o){
+ st.cards.forEach((c,k)=>{
+  const to=st.spread?spreadPos(st,k):deckPos(st,k);
+  const rz=st.spread?spreadRot(st,k,c):restRot(st,c);
+  if(!o){c.mesh.position.copy(to);c.mesh.rotation.set(0,0,rz);c.tw=null;return}
+  if(!c.tw&&c.mesh.position.distanceToSquared(to)<1e-6&&Math.abs(c.mesh.rotation.z-rz)<1e-4)return;
+  const centre=st.spread&&k===st.cur;
+  const delay=(o.stagger||0)*k+(centre?(o.inDelay||0):0);
+  moveCard(c,to,rz,delay,o.dur||.8,o.lift||LIFT);
+ });
+}
+function moveCard(c,to,rz,delay,dur,lift){
+ const m=c.mesh;
+ c.tw={from:m.position.clone(),to:to.clone(),rz0:m.rotation.z,rz1:rz,t0:performance.now()*.001+delay,dur:dur,lift:lift};
+}
+function stepTween(c,now){
+ const T=c.tw,m=c.mesh;
+ const u=Math.min(1,Math.max(0,(now-T.t0)/T.dur));
+ if(u===0)return;                         // still waiting for its turn
+ const e=easeInOutCubic(u),arc=Math.sin(Math.PI*u),dx=T.to.x-T.from.x;
+ m.position.set(
+  T.from.x+dx*e,
+  T.from.y+(T.to.y-T.from.y)*e+arc*.22,
+  T.from.z+(T.to.z-T.from.z)*e+arc*T.lift);
+ m.rotation.set(.1*arc,-Math.sign(dx)*.42*arc,T.rz0+(T.rz1-T.rz0)*e);
+ m.scale.setScalar(1+.05*arc);
+ if(u>=1){c.tw=null;m.position.copy(T.to);m.rotation.set(0,0,T.rz1);m.scale.setScalar(1)}
 }
 function makeStack(data,i,home){
- const n=data.images.length;
- const st={i:i,data:data,n:n,home:home.clone(),order:[...Array(n).keys()],cards:[],tilt:rnd(-.04,.04),shade:1};
- st.pin=new THREE.Mesh(new THREE.SphereGeometry(.1,16,16),new THREE.MeshStandardMaterial({color:0x9c1f1f,roughness:.3,metalness:.1,emissive:0x200000}));world.add(st.pin);
- for(let j=0;j<n;j++){
-  const canvas=document.createElement("canvas");canvas.width=520;canvas.height=444;
+ const n=data.cards.length;
+ const st={i:i,data:data,n:n,home:home.clone(),cards:[],tilt:rnd(-.04,.04),shade:1,cur:0,spread:false};
+ st.pin=new THREE.Mesh(new THREE.SphereGeometry(.1,16,16),new THREE.MeshStandardMaterial({color:0x9c1f1f,roughness:.3,metalness:.1,emissive:0x200000}));
+ st.pin.position.copy(st.home).add(PIN_UP);world.add(st.pin);
+ data.cards.forEach((info,j)=>{
+  const canvas=document.createElement("canvas");canvas.width=CANVAS_W;canvas.height=CANVAS_H;
   const tex=new THREE.CanvasTexture(canvas);tex.anisotropy=8;
   const mat=new THREE.MeshStandardMaterial({map:tex,roughness:.9,color:0xffffff,side:THREE.DoubleSide});
-  const mesh=new THREE.Mesh(new THREE.PlaneGeometry(4.15,3.55),mat);mesh.castShadow=true;mesh.receiveShadow=true;world.add(mesh);
-  const card={st:st,j:j,canvas:canvas,g:canvas.getContext("2d"),tex:tex,mat:mat,mesh:mesh,photo:null,rank:j,tp:new THREE.Vector3(),trz:0,jit:j?rnd(-.07,.07):0,anim:null};
+  const mesh=new THREE.Mesh(new THREE.PlaneGeometry(CARD_SIZE.w,CARD_SIZE.h),mat);mesh.castShadow=true;mesh.receiveShadow=true;world.add(mesh);
+  const card={st:st,j:j,info:info,canvas:canvas,g:canvas.getContext("2d"),tex:tex,mat:mat,mesh:mesh,photo:null,jit:j?rnd(-.07,.07):0,tw:null};
   st.cards.push(card);cards.push(card);paintCard(card);
-  loadPhoto(i,j).then(img=>{if(img&&!img.tainted){card.photo=img;paintCard(card)}});
- }
- applyRanks(st);st.cards.forEach(c=>{c.mesh.position.copy(c.tp);c.mesh.rotation.z=c.trz});
+  loadMedia(card);
+ });
+ layoutScene(st,null);
  stacks.push(st);
 }
-SCENES.forEach((s,i)=>makeStack(s,i,new THREE.Vector3(SPOTS[i][0]+rnd(-.5,.5),SPOTS[i][1]+rnd(-.4,.4),rnd(-.1,.1))));
-
-/* card pulled from the back of its stack, swung out and laid on top (2.5 s) */
-const ANIM=2.5;
-function finishAnim(c){
- if(!c.anim)return;const st=c.st;
- if(!c.anim.swapped){st.order=st.order.filter(x=>x!==c.j);st.order.unshift(c.j);applyRanks(st)}
- c.anim=null;c.mesh.position.copy(c.tp);c.mesh.rotation.set(0,0,c.trz);c.mesh.scale.setScalar(1);
-}
-function startAnim(c){
- cards.forEach(finishAnim);
- const m=c.mesh;
- c.anim={t0:performance.now()*.001,S:m.position.clone(),F:rankPos(c.st,0),rz0:m.rotation.z,dir:c.st.home.x<-6?1:-1,swapped:false};
-}
-function stepAnim(c,now){
- const A=c.anim,m=c.mesh,u=Math.min(1,(now-A.t0)/ANIM),cl=x=>Math.max(0,Math.min(1,x));
- const out=easeInOutCubic(cl(u/.4)),trv=easeInOutCubic(cl((u-.4)/.6));
- const ox=A.S.x+A.dir*3.8*out,oy=A.S.y-.3*out;
- m.position.x=ox+(A.F.x-ox)*trv;m.position.y=oy+(A.F.y-oy)*trv;
- const lift=A.F.z+.6;
- m.position.z=u<.62?A.S.z+(lift-A.S.z)*easeInOutCubic(cl((u-.3)/.32)):lift+(A.F.z-lift)*easeInOutCubic(cl((u-.72)/.28));
- const sw=Math.sin(Math.PI*cl((u-.25)/.75));
- m.rotation.y=A.dir*-.7*sw;m.rotation.x=.14*sw;
- m.rotation.z=A.rz0+(A.dir*.28)*out*(1-trv)+(c.trz-A.rz0)*trv;
- m.scale.setScalar(1+.09*Math.sin(Math.PI*trv));
- if(u>=.55&&!A.swapped){A.swapped=true;const st=c.st;st.order=st.order.filter(x=>x!==c.j);st.order.unshift(c.j);applyRanks(st)}
- if(u>=1)finishAnim(c);
+function spotVec(idx){const p=basePos(idx);return new THREE.Vector3(p[0]+rnd(-.5,.5),p[1]+rnd(-.4,.4),rnd(-.1,.1))}
+/* scenes land on random spots of the board; their order (1, 2, 3 ...) stays the same */
+function buildBoard(){
+ const order=shuffledIndices(SCENES.length);
+ SCENES.forEach((s,i)=>makeStack(s,i,spotVec(order[i])));
+ buildSteps();
+ rebuildThreads();
+ document.getElementById("introScenes").textContent=SCENES.length;
+ contentReady=true;
+ if(pendingEnter){pendingEnter=false;enterRoom()}
 }
 
 /* ---------- RED THREADS ---------- */
@@ -451,7 +528,7 @@ function rebuildThreads(){
  while(threadGroup.children.length){const o=threadGroup.children[0];threadGroup.remove(o);if(o.geometry)o.geometry.dispose()}
  if(!threadsOn)return;
  const mat=new THREE.MeshStandardMaterial({color:0x7a1717,roughness:.6});
- const pairs=[];for(let i=0;i<SCENES.length-1;i++)pairs.push([i,i+1]);EXTRA.forEach(p=>pairs.push(p));
+ const pairs=[];for(let i=0;i<SCENES.length-1;i++)pairs.push([i,i+1]);EXTRA.filter(p=>p[0]<SCENES.length&&p[1]<SCENES.length).forEach(p=>pairs.push(p));
  pairs.forEach((p,j)=>{
   const a=stacks[p[0]].pin.position.clone(),b=stacks[p[1]].pin.position.clone();
   const mid=a.clone().add(b).multiplyScalar(.5);mid.y+=(j%2?-1:1)*(.3+(j%4)*.12);mid.z+=.6;
@@ -468,105 +545,153 @@ const pad2=n=>String(n).padStart(2,"0");
 function syncMasterVolume(){const v=soundOn?masterVolume:0;bgm.volume=Math.max(0,Math.min(1,bgNow*v));if(sfx){sfx.volume=v;sfx.muted=!soundOn}if(startSfx){startSfx.volume=v;startSfx.muted=!soundOn}}
 function startBgm(){if(bgStarted)return;bgStarted=true;const p=bgm.play();if(p&&p.catch)p.catch(()=>{})}
 function stopSfx(){if(sfx){sfx.onended=sfx.onerror=null;sfx.pause();sfx=null}ducking=false}
-function playSfx(i,j,cb){
+function playSfx(id,cb){
  stopSfx();
- const a=new Audio(AUDIO_DIR+"s"+pad2(i+1)+"-"+(j+1)+".mp3");a.muted=!soundOn;sfx=a;ducking=true;
+ const a=new Audio(AUDIO_DIR+id+".mp3");a.muted=!soundOn;sfx=a;ducking=true;
  let done=false;const fin=ok=>{if(done)return;done=true;if(sfx===a){sfx=null;ducking=false}if(cb)cb(ok)};
  a.onended=()=>fin(true);a.onerror=()=>fin(false);
  const p=a.play();if(p&&p.catch)p.catch(()=>fin(false));
 }
 
 /* ---------- NAV / STATE ---------- */
-let active=-1,lampOn=true,factsOn=true,lampEnergy=0;
+let active=-1,focusCard=-1,lampOn=true,keepLit=false,litScene=-1,factsOn=true,lampEnergy=0;
+let steps=[],contentReady=false,contentFailed=false,pendingEnter=false;
 const targetPos=new THREE.Vector3(0,0,23),targetLook=new THREE.Vector3(0,0,0),lookNow=new THREE.Vector3();
-const camTween={from:new THREE.Vector3(),fromLook:new THREE.Vector3(),start:-99,dur:1.7};
+const camTween={from:new THREE.Vector3(),fromLook:new THREE.Vector3(),start:-99,dur:1.7,bump:0};
 const lampGoal={pos:new THREE.Vector3(0,6,9),target:new THREE.Vector3(0,0,0)};
 let lampStart=-99;
 function easeInOutCubic(t){return t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2}
 function easeOutCubic(t){return 1-Math.pow(1-t,3)}
-function tweenCamera(dur){camTween.from.copy(camera.position);camTween.fromLook.copy(lookNow);camTween.start=performance.now()*.001;camTween.dur=dur||1.7}
+function tweenCamera(dur,bump){camTween.from.copy(camera.position);camTween.fromLook.copy(lookNow);camTween.start=performance.now()*.001;camTween.dur=dur||1.7;camTween.bump=bump||0}
 let yaw=0,pitch=0,drag=false,lx=0,ly=0,moved=false;
 function toast(msg){const el=document.getElementById("toast");el.textContent=msg;el.classList.add("show");clearTimeout(toast.t);toast.t=setTimeout(()=>el.classList.remove("show"),1600)}
 function setButton(id,on,label){const b=document.getElementById(id);b.classList.toggle("active",on);if(label)b.querySelector("span").textContent=label}
-function fillPanel(i){
- const s=SCENES[i];
- document.getElementById("meta").textContent="SCENE "+pad2(i+1)+" · "+s.date;
- document.getElementById("title").textContent=s.title;
- document.getElementById("story").textContent=s.story;
- const thumbs=document.getElementById("thumbs");thumbs.innerHTML="";
- s.images.forEach((cap,j)=>{
-  const b=document.createElement("button");b.className="thumb";b.title=cap;
-  setPhotoBg(b,i,j,cap,s.tone);
-  const sp=document.createElement("span");sp.textContent=cap;b.appendChild(sp);
-  b.onclick=()=>selectImage(j);thumbs.appendChild(b);
- });
- const notes=document.getElementById("notes");notes.innerHTML="";
- s.notes.forEach(n=>{const p=document.createElement("p");p.textContent="• "+n;notes.appendChild(p)});
+/* ---------- SCENE / FOCUS ----------
+   Right: next card; after the last card of a scene, the next scene (its layout is left as it is);
+   after the last card of the last scene, zoom out.
+   Left: previous card; before the first card, the previous scene on the card you left it at;
+   before the first card of the first scene, zoom out. */
+function sceneCaption(i){return "SCENE "+pad2(i+1)+" / "+SCENES.length+(SCENES[i].place?" · "+SCENES[i].place:"")}
+function focusDist(){
+ /* distance at which one card fills most of the view, whatever the screen shape */
+ const vt=Math.tan(camera.fov*Math.PI/360),a=camera.aspect;
+ return Math.max(CARD_SIZE.w/(.82*2*vt*a),CARD_SIZE.h/(.72*2*vt));
 }
-function selectImage(j,force,fromTour,cb){
- if(active<0)return;
- if(!fromTour)stopTour();
- const st=stacks[active],s=st.data;
- setPhotoBg(document.getElementById("focusImage"),active,j,s.images[j],s.tone);
- document.getElementById("focusCaption").textContent=s.images[j];
- Array.from(document.querySelectorAll(".thumb")).forEach((b,k)=>b.classList.toggle("selected",k===j));
- const needs=st.order[0]!==j;
- if(needs)startAnim(st.cards[j]);
- if(needs||force)playSfx(active,j,cb);else if(cb)cb(false);
+function transitDist(){
+ /* distance at which about half of the 30-unit wide board is on screen */
+ const vt=Math.tan(camera.fov*Math.PI/360),a=camera.aspect;
+ return Math.max(focusDist(),15/(2*vt*a));
 }
-function focusScene(i,j,fromTour,cb){
- if(i<0||i>=stacks.length)return;
+function aimScene(i){
+ const p=stacks[i].home,d=focusDist();
+ targetPos.set(p.x,p.y+.05,p.z+d);targetLook.set(p.x,p.y,p.z);
+ lampGoal.pos.set(p.x-1.8,p.y+4.4,p.z+6.4);lampGoal.target.set(p.x,p.y,p.z);
+}
+function aimLamp(){
+ if(active>=0)return;
+ if(keepLit&&litScene>=0){const p=stacks[litScene].home;lampGoal.pos.set(p.x-1.8,p.y+4.4,p.z+6.4);lampGoal.target.set(p.x,p.y,p.z)}
+ else{lampGoal.pos.set(0,6,9);lampGoal.target.set(0,0,0)}
+}
+function applyShades(){
+ stacks.forEach((s,k)=>{s.shade=active>=0?(k===active?1:CFG.dimCards):(keepLit&&k===litScene?1:CFG.overviewCards)});
+}
+function showCard(i,j,cb,fromTour){
+ if(!stacks.length)return;
  if(!fromTour)stopTour();
- const same=active===i;active=i;const p=stacks[i].home;
- if(!same){
-  const wasOverview=true;
-  const ox=PORTRAIT?0:2.1,oy=PORTRAIT?-3.1:0;targetPos.set(p.x+ox,p.y+.2+oy,p.z+8.4);targetLook.set(p.x+ox,p.y+oy,p.z);tweenCamera(1.7);
-  lampGoal.pos.set(p.x-1.8,p.y+4.4,p.z+6.4);lampGoal.target.set(p.x,p.y,p.z);
-  if(wasOverview&&lampEnergy<.3)lampStart=performance.now()*.001;
-  stacks.forEach((s,k)=>{s.shade=k===i?1:CFG.dimCards});
-  document.getElementById("panel").classList.add("open");
-  fillPanel(i);
-  document.getElementById("status").textContent="SCENE "+(i+1)+" / "+SCENES.length+" · "+SCENES[i].place;
+ const st=stacks[i];
+ j=Math.max(0,Math.min(st.n-1,j));
+ const prevActive=active,wasSpread=st.spread;
+ if(prevActive!==i){
+  const crossing=prevActive>=0;
+  active=i;aimScene(i);
+  tweenCamera(crossing?1.9:1.7,crossing?Math.max(0,transitDist()-focusDist()):0);   // pulls back to half the board, then in
+  if(lampEnergy<.3)lampStart=performance.now()*.001;
+  litScene=i;applyShades();
  }
- selectImage(j||0,!same||fromTour,fromTour,cb);
+ if(prevActive===i&&wasSpread&&st.cur===j){if(cb)cb(false);return}
+ st.cur=j;st.spread=true;focusCard=j;
+ layoutScene(st,wasSpread?{inDelay:.22,dur:.7}:{stagger:.07,dur:.85});
+ document.getElementById("status").textContent=sceneCaption(i)+" · CARD "+(j+1)+" / "+st.n;
+ playSfx(st.cards[j].info.id,cb);
+}
+function nextStop(){
+ if(!stacks.length)return;
+ if(active<0)return showCard(0,stacks[0].cur);
+ const st=stacks[active];
+ if(st.cur<st.n-1)return showCard(active,st.cur+1);
+ if(active<stacks.length-1)return showCard(active+1,stacks[active+1].cur);
+ overview();
+}
+function prevStop(){
+ if(active<0)return;
+ const st=stacks[active];
+ if(st.cur>0)return showCard(active,st.cur-1);
+ if(active>0)return showCard(active-1,stacks[active-1].cur);
+ overview();
 }
 function overview(){
  stopTour();stopSfx();
- active=-1;targetPos.set(0,0,HOME_Z);targetLook.set(0,0,0);tweenCamera(1.7);
- lampGoal.pos.set(0,6,9);lampGoal.target.set(0,0,0);
- document.getElementById("panel").classList.remove("open");
- stacks.forEach(s=>{s.shade=CFG.overviewCards});
+ active=-1;focusCard=-1;
+ targetPos.set(0,0,HOME_Z);targetLook.set(0,0,0);tweenCamera(1.7,0);
+ stacks.forEach(st=>{st.spread=false;layoutScene(st,{stagger:.05,dur:.9})});
+ aimLamp();applyShades();
  document.getElementById("status").textContent="THE MAN WHO HAD NO NAME";
 }
+function toggleKeepLit(){
+ keepLit=!keepLit;
+ setButton("keepBtn",keepLit,keepLit?"Lit Scene · On":"Lit Scene · Off");
+ applyShades();aimLamp();
+ toast(keepLit?"Light stays on the current scene":"Light follows the focused card");
+}
+/* reads the json, then builds the board; shows the reason on the intro screen if that fails */
+async function loadContent(){
+ try{
+  const res=await fetch(CFG.CONTENT_URL,{cache:"no-cache"});
+  if(!res.ok)throw new Error("HTTP "+res.status);
+  SCENES=parseScenes(await res.json());
+  if(!SCENES.length)throw new Error("no valid entries (expected ids like s01-1)");
+  buildBoard();
+ }catch(err){
+  contentFailed=true;
+  console.error("Could not load "+CFG.CONTENT_URL,err);
+  const msg="COULD NOT LOAD "+CFG.CONTENT_URL+" · OPEN THIS PAGE THROUGH A LOCAL SERVER";
+  document.getElementById("status").textContent=msg;
+  document.getElementById("introHint").textContent=msg;
+ }
+}
 
-/* ---------- TOUR: every image in order, each waits for its own sound ---------- */
-const steps=[];SCENES.forEach((s,i)=>s.images.forEach((_,j)=>steps.push([i,j])));
+/* ---------- TOUR: every card in order, each waits for its own sound ---------- */
 let tourOn=false,tourTimer=null,tourTok=0,tourIdx=0;
+function buildSteps(){steps=[];SCENES.forEach((s,i)=>s.cards.forEach((_,j)=>steps.push([i,j])))}
 function stopTour(){tourTok++;clearTimeout(tourTimer);tourOn=false;setButton("tourBtn",false,"Tour")}
 function tourStep(){
- if(!tourOn)return;const tok=++tourTok,st=steps[tourIdx];
- focusScene(st[0],st[1],true,played=>{
+ if(!tourOn)return;const tok=++tourTok,s=steps[tourIdx];
+ showCard(s[0],s[1],played=>{
   if(tok!==tourTok)return;
   tourTimer=setTimeout(()=>{tourIdx=(tourIdx+1)%steps.length;tourStep()},played?1800:7000);
- });
+ },true);
 }
 function startTour(){
  if(tourOn){stopTour();return}
+ if(!steps.length)return;
  tourOn=true;setButton("tourBtn",true,"Stop Tour");
- tourIdx=active<0?0:Math.max(0,steps.findIndex(s=>s[0]===active&&s[1]===stacks[active].order[0]));
+ tourIdx=Math.max(0,active<0?0:steps.findIndex(s=>s[0]===active&&s[1]===stacks[active].cur));
  tourStep();
 }
 function shuffle(){
  stopTour();
- stacks.forEach((st,i)=>{const p=SPOTS[i];st.home.set(p[0]+rnd(-1.1,1.1),p[1]+rnd(-.8,.8),rnd(-.1,.1));st.tilt=rnd(-.07,.07);applyRanks(st)});
- setTimeout(rebuildThreads,1500);toast("Board rearranged");
+ const order=shuffledIndices(stacks.length);
+ stacks.forEach((st,i)=>{const p=basePos(order[i]);st.home.set(p[0]+rnd(-.5,.5),p[1]+rnd(-.4,.4),rnd(-.1,.1));st.tilt=rnd(-.07,.07)});
+ stacks.forEach(st=>layoutScene(st,{stagger:.04,dur:1.5,lift:1.8}));
+ if(active>=0){aimScene(active);tweenCamera(1.4,0)}
+ setTimeout(rebuildThreads,1600);toast("Board rearranged");
 }
 function toggleLights(){lampOn=!lampOn;setButton("lampBtn",lampOn,lampOn?"Lights On":"Lights Off");ambient.intensity=lampOn?CFG.ambient:CFG.ambient*.4;toast(lampOn?"Lights on":"Lights off")}
 function toggleSound(){soundOn=!soundOn;syncMasterVolume();setButton("soundBtn",soundOn,soundOn?"Sound On":"Sound Off");toast(soundOn?"Sound on":"Sound off")}
 function toggleThreads(){threadsOn=!threadsOn;rebuildThreads();setButton("threadsBtn",threadsOn,threadsOn?"Red Threads":"Threads Off")}
 function toggleFacts(){factsOn=!factsOn;factGroup.visible=factsOn;setButton("factsBtn",factsOn,factsOn?"Case Notes":"Notes Off")}
 const $=id=>document.getElementById(id);
-$("overviewBtn").onclick=overview;$("closePanel").onclick=overview;$("shuffleBtn").onclick=shuffle;
+$("overviewBtn").onclick=overview;$("shuffleBtn").onclick=shuffle;$("keepBtn").onclick=toggleKeepLit;
 $("threadsBtn").onclick=toggleThreads;$("factsBtn").onclick=toggleFacts;$("lampBtn").onclick=toggleLights;
 $("soundBtn").onclick=toggleSound;$("tourBtn").onclick=startTour;
 const volumeBtn=$("volumeBtn"),volumePopover=$("volumePopover"),volumeSlider=$("masterVolume");
@@ -576,8 +701,6 @@ volumeSlider.oninput=()=>{masterVolume=Number(volumeSlider.value)/100;$("volumeV
 addEventListener("click",e=>{if(!$("volumeWrap").contains(e.target)){volumePopover.hidden=true;volumeBtn.setAttribute("aria-expanded","false")}});
 function toggleToolbar(){const hidden=document.body.classList.toggle("toolbar-hidden");$("toolbar").classList.toggle("is-hidden",hidden);$("toolbarHint").setAttribute("aria-expanded",String(!hidden));if(hidden)$("toolbarHint").focus();else $("overviewBtn").focus()}
 $("toolbarHint").onclick=toggleToolbar;
-$("prevBtn").onclick=()=>focusScene(Math.max(0,active-1));
-$("nextBtn").onclick=()=>focusScene(Math.min(SCENES.length-1,active+1));
 
 /* ---------- INTRO: the case file ---------- */
 const intro=$("intro");let fileOpen=false,entered=false;
@@ -586,7 +709,9 @@ function openFile(){
  const a=new Audio(AUDIO_DIR+"start.mp3");startSfx=a;syncMasterVolume();a.play().catch(()=>{});
 }
 function enterRoom(){
- if(entered||!fileOpen)return;entered=true;
+ if(entered||!fileOpen)return;
+ if(!contentReady){pendingEnter=true;if(!contentFailed)document.getElementById("introHint").textContent="LOADING THE CASE FILES…";return}
+ entered=true;
  intro.classList.add("gone");document.body.classList.add("entered");startBgm();
  camera.position.set(0,1.2,33);tweenCamera(3.2);lampEnergy=0;lampStart=performance.now()*.001+.8;
  setTimeout(()=>intro.remove(),1700);
@@ -621,7 +746,7 @@ renderer.domElement.addEventListener("click",e=>{
  const hit=ray.intersectObjects(cards.map(c=>c.mesh))[0];
  if(!hit)return;
  const c=cards.find(c=>c.mesh===hit.object);
- if(c.st.i===active){if(c.st.order[0]!==c.j)selectImage(c.j)}else focusScene(c.st.i,0);
+ showCard(c.st.i,c.j);
 });
 addEventListener("wheel",e=>{if(active<0)targetPos.z=Math.max(15,Math.min(31,targetPos.z+e.deltaY*.012))},{passive:true});
 addEventListener("keydown",e=>{
@@ -631,12 +756,12 @@ addEventListener("keydown",e=>{
  const k=e.key.toLowerCase();
  if(!entered){if(k==="enter"||k===" "){fileOpen?enterRoom():openFile()}return}
  if(k==="escape")overview();
- else if(k==="arrowright")focusScene(Math.min(SCENES.length-1,active+1));
- else if(k==="arrowleft")focusScene(Math.max(0,active-1));
- else if(k==="o")toggleLights();else if(k==="t")startTour();else if(k==="m")toggleSound();
+ else if(k==="arrowright")nextStop();
+ else if(k==="arrowleft")prevStop();
+ else if(k==="o")toggleLights();else if(k==="k")toggleKeepLit();else if(k==="t")startTour();else if(k==="m")toggleSound();
  else if(k==="r")toggleThreads();else if(k==="n")toggleFacts();else if(k==="s")shuffle();
 });
-addEventListener("resize",()=>{fitCamera();renderer.setSize(innerWidth,innerHeight);if(active<0)targetPos.z=HOME_Z});
+addEventListener("resize",()=>{fitCamera();renderer.setSize(innerWidth,innerHeight);if(active<0)targetPos.z=HOME_Z;else aimScene(active)});
 
 /* ---------- LOOP ---------- */
 let last=performance.now()*.001;
@@ -644,27 +769,27 @@ function animate(){
  requestAnimationFrame(animate);
  const now=performance.now()*.001,dt=Math.min(.1,now-last);last=now;
  cards.forEach(c=>{
-  if(c.anim)stepAnim(c,now);else{
-   c.mesh.position.lerp(c.tp,.045);
-   const r=c.mesh.rotation;r.x+=(0-r.x)*.08;r.y+=(0-r.y)*.08;r.z+=(c.trz-r.z)*.06;
-  }
-  const goal=c.st.shade*(c.rank===0?1:.8),cur=c.mat.color.r;
+  if(c.tw)stepTween(c,now);
+  const focused=c.st.spread&&c.st.i===active&&c.j===c.st.cur;
+  const goal=c.st.shade*(focused?1:.8),cur=c.mat.color.r;
   c.mat.color.setScalar(cur+(goal-cur)*.05);
  });
- stacks.forEach(st=>{if(st.pin.visible!==undefined)st.pin.visible=true});
+ stacks.forEach(st=>{st.pin.visible=true;st.pin.position.lerp(_pinGoal.copy(st.home).add(PIN_UP),.12)});
  bgNow+=((ducking?BG_DUCK:BG_FULL)-bgNow)*.04;syncMasterVolume();
+ updateVideos();
 
  const cam=targetPos.clone();
  if(active<0){cam.x+=Math.sin(yaw)*cam.z*.28;cam.z*=Math.cos(yaw)*.88+.12;cam.y+=pitch*3}
  const ct=Math.min(1,(now-camTween.start)/camTween.dur);
  if(ct<1){
   const e=easeInOutCubic(ct);
-  camera.position.lerpVectors(camTween.from,targetPos,e);camera.position.z+=Math.sin(Math.PI*e)*1.2;
+  camera.position.lerpVectors(camTween.from,targetPos,e);camera.position.z+=Math.sin(Math.PI*e)*camTween.bump;
   lookNow.lerpVectors(camTween.fromLook,targetLook,e);
  }else{camera.position.lerp(cam,.06);lookNow.lerp(targetLook,.07)}
  camera.lookAt(lookNow);
 
- const desired=lampOn?(active>=0?CFG.focusLamp:CFG.overviewLamp):0;
+ const litNow=active>=0||(keepLit&&litScene>=0);
+ const desired=lampOn?(litNow?CFG.focusLamp:CFG.overviewLamp):0;
  lampEnergy+=(desired-lampEnergy)*.08;
  const sinceOn=now-lampStart;
  let warmAmt=easeOutCubic(Math.min(1,Math.max(0,sinceOn/1.8)));
@@ -675,7 +800,7 @@ function animate(){
  stepDust(now,dt,Math.min(1,lamp.intensity/2));
  renderer.render(world,camera);
 }
-overview();animate();
+overview();animate();loadContent();
 })();
 </script>
 </body>

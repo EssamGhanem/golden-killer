@@ -1,0 +1,190 @@
+{
+  "scenes": [
+    {
+      "text": "A resident returns to find her home disturbed. Similar reports begin to accumulate across town. This opening resident is a composite character, not a named historical victim.",
+      "scene": "s01-1"
+    },
+    {
+      "text": "Drawers left open, a bedroom no longer her own — the intruder's absence leaves only questions, not answers. Imagined for the board; not a documented photograph.",
+      "scene": "s01-2"
+    },
+    {
+      "text": "Between April 1974 and the end of 1975, Visalia police investigated more than one hundred residential burglaries. The offender later became known as the Visalia Ransacker.",
+      "scene": "s02-1",
+      "caption": "Visalia area map"
+    },
+    {
+      "text": "Investigators connect the locations on the map, tracing reports, fingerprints, and footprints. The pattern is local — but the offender's identity remains unknown.",
+      "scene": "s02-2",
+      "caption": "Case notes and reports"
+    },
+    {
+      "text": "Outside, the city seems calm. Inside, residents' sense of home changes: Did I lock the door? Was someone near the window?",
+      "scene": "s02-3",
+      "caption": "Neighborhood at night"
+    },
+    {
+      "text": "In the Snelling family home, sixteen-year-old Beth wakes to find a man trying to take her from the house. Her father, Claude Snelling, rushes to help her. The attacker shoots him and flees.",
+      "scene": "s03-1"
+    },
+    {
+      "text": "Afterward: an open door, a family waiting for news from the hospital, and detectives trying to understand how a series of break-ins turned into murder.",
+      "scene": "s03-2"
+    },
+    {
+      "text": "This is the first known murder in the Visalia series. Snelling was a college professor, killed after intervening to thwart an attempt to abduct his daughter. DeAngelo later admitted to the killing.",
+      "scene": "s03-3"
+    },
+    {
+      "text": "In December 1975, Detective Bill McGowen lies in wait at a location where he expects the perpetrator to return. The man does return. The detective confronts him.",
+      "scene": "s04-1",
+      "caption": "A stakeout in the dark"
+    },
+    {
+      "text": "The suspect fires at the detective's flashlight and escapes. McGowen came close to catching him, but the Visalia Ransacker remained unidentified for decades.",
+      "scene": "s04-2",
+      "caption": "A damaged flashlight · symbolic"
+    },
+    {
+      "text": "Months later, a series of attacks begins in the Sacramento area. The first known victim in this new series is attacked in her home. Police discover the incident is not isolated.",
+      "scene": "s05-1"
+    },
+    {
+      "text": "The attacks spread across Northern California neighborhoods. Investigators begin treating them as a single series and give it the name the public will come to know: the East Area Rapist.",
+      "scene": "s05-2"
+    },
+    {
+      "text": "The nickname was assigned by investigators and the press; it was not the offender's known name. Detectives do not yet know the East Area Rapist may be the same person as the Visalia Ransacker.",
+      "scene": "s05-3"
+    },
+    {
+      "text": "In 1994, cold case investigator Paul Holes becomes acquainted with the case. Before him is not a killer's name, but separate files, victims in different cities, and evidence collected before DNA testing.",
+      "scene": "s06-1",
+      "caption": "Holes reviewing case files · dramatization"
+    },
+    {
+      "text": "In 2001, DNA comparison helps link the East Area Rapist series to murders in Southern California. Investigators now have proof the cases are connected — but still no name.",
+      "scene": "s06-2",
+      "caption": "DNA comparison · symbolic"
+    },
+    {
+      "text": "For Holes, the puzzle changes. The question is no longer only 'Who committed these crimes?' but also 'How do we bring all these cases into one file?'",
+      "scene": "s06-3",
+      "caption": "California case map"
+    },
+    {
+      "text": "Years pass. No direct match comes from criminal DNA databases. A new path emerges: genetic genealogy. Instead of waiting for the perpetrator's own match, the team looks for distant genetic relatives.",
+      "scene": "s07-1",
+      "caption": "A family tree · illustrative"
+    },
+    {
+      "text": "Genealogy expert Barbara Rae-Venter joins the work, reviewing family connections and records while detectives test possibilities. The tree is a map of probabilities — not a confession, not a verdict.",
+      "scene": "s07-2",
+      "caption": "A laboratory comparison · symbolic"
+    },
+    {
+      "text": "DNA is collected from an item DeAngelo left in a public place and compared with evidence preserved from the crimes. A match comes back. The genealogical lead still had to be verified with independent evidence.",
+      "scene": "s08-1",
+      "caption": "A suburban home at dusk"
+    },
+    {
+      "text": "On April 24, 2018, Joseph James DeAngelo — a former police officer — is arrested at his home in Citrus Heights. After decades, the criminal has a name.",
+      "scene": "s08-2",
+      "caption": "Evidence bag · illustrative"
+    },
+    {
+      "text": "After decades, the criminal had a name. But his name did not explain why he started, why he continued, or why his known crimes stopped after 1986.",
+      "scene": "s08-3",
+      "caption": "Case file marked 2018"
+    },
+    {
+      "text": "DeAngelo had worked as a police officer in Exeter and then Auburn, and was fired from the Auburn police department in 1979 after a shoplifting conviction.",
+      "scene": "s09-1"
+    },
+    {
+      "text": "Later he worked for years at a distribution center, married, and started a family. A normal-looking life is not evidence of motive or innocence.",
+      "scene": "s09-2"
+    },
+    {
+      "text": "These details reveal the paradox of the investigation: the man the police were hunting was living in the middle of society, while his name remained absent from the crime files.",
+      "scene": "s09-3"
+    },
+    {
+      "text": "In court, DeAngelo pleads guilty to 13 murders and 13 kidnapping charges connected to the burglaries, and admits to additional crimes.",
+      "scene": "s10-1",
+      "caption": "Courtroom · illustrative"
+    },
+    {
+      "text": "The scope of the crimes and their impact on victims and their families are described before the court. In August 2020, he is sentenced to life in prison without the possibility of parole.",
+      "scene": "s10-2",
+      "caption": "Empty courtroom seats"
+    },
+    {
+      "text": "The case was closed with a name and a confession. But why it all began remained a question without a certain answer.",
+      "scene": "s10-3",
+      "caption": "California case timeline"
+    }
+  ],
+  "sceneMeta": {
+    "s01": {
+      "title": "The House That Changed",
+      "date": "Visalia · April 1974",
+      "place": "VISALIA",
+      "tone": "#4a3a2a"
+    },
+    "s02": {
+      "title": "A Pattern on the Wall",
+      "date": "Visalia · 1974–1975",
+      "place": "TULARE COUNTY",
+      "tone": "#3c3a2c"
+    },
+    "s03": {
+      "title": "The Father Steps In",
+      "date": "Visalia · September 11, 1975",
+      "place": "VISALIA",
+      "tone": "#4a2e28"
+    },
+    "s04": {
+      "title": "The Stakeout",
+      "date": "Visalia · December 1975",
+      "place": "VISALIA",
+      "tone": "#2e2c28"
+    },
+    "s05": {
+      "title": "A New Series",
+      "date": "Rancho Cordova · June 18, 1976",
+      "place": "SACRAMENTO COUNTY",
+      "tone": "#33382f"
+    },
+    "s06": {
+      "title": "The Case Remains Open",
+      "date": "1994 · 2001",
+      "place": "NORTHERN & SOUTHERN CALIFORNIA",
+      "tone": "#2c3538"
+    },
+    "s07": {
+      "title": "A Name in the Family Tree",
+      "date": "Forensic genetic genealogy · 2017–2018",
+      "place": "CALIFORNIA",
+      "tone": "#3a3230"
+    },
+    "s08": {
+      "title": "The Ordinary House",
+      "date": "Citrus Heights · April 2018",
+      "place": "CITRUS HEIGHTS",
+      "tone": "#303a33"
+    },
+    "s09": {
+      "title": "The Other Life",
+      "date": "Auburn · 1970s to 2010s",
+      "place": "AUBURN · SACRAMENTO",
+      "tone": "#3b3328"
+    },
+    "s10": {
+      "title": "The Admission",
+      "date": "California · June–August 2020",
+      "place": "SACRAMENTO",
+      "tone": "#2a2526"
+    }
+  }
+}
