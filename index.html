@@ -175,7 +175,7 @@
             color: #ff2a2a;
             border: 1px solid #6e0d0d;
             padding: 9px 11px;
-            font: 700 calc(var(--W)*.03)/1.45 'Courier New', monospace;
+            font: 700 calc(var(--W)*.036)/1.45 'Courier New', monospace;
             letter-spacing: .03em
         }
 
@@ -506,7 +506,7 @@
         }
 
         .folderWrap {
-            --W: min(460px, 42vw, 50vh);
+            --W: min(620px, 58vw, 60vh);
             position: relative;
             text-align: center
         }
@@ -549,7 +549,7 @@
         .paper {
             background: radial-gradient(circle at 30% 20%, #e4d6b0, #bba679);
             color: #1f160d;
-            font: calc(var(--W)*.034)/1.55 'Courier New', monospace
+            font: calc(var(--W)*.036)/1.5 'Courier New', monospace
         }
 
         .front {
@@ -1095,6 +1095,7 @@
                 g.save(); g.translate(44, 28); g.rotate(-.5); g.fillRect(-18, -8, 70, 18); g.restore();
                 g.save(); g.translate(PW - 44, 28); g.rotate(.45); g.fillRect(-18, -8, 70, 18); g.restore();
 
+                ageCard(card, g, PW, PH);
                 if (st.i === SCENES.length - 1) {
                     g.save(); g.translate(PW / 2, 218); g.rotate(-.22);
                     g.strokeStyle = "rgba(140,28,28,.7)"; g.lineWidth = 6; g.strokeRect(-160, -42, 320, 84);
@@ -1102,6 +1103,76 @@
                     g.restore();
                 }
                 card.tex.needsUpdate = true;
+            }
+
+            /* ---------- AGED PAPER: the story runs 1974 to 2020 ----------
+               card.age: 1 = the first card (1974, old, yellowed, scratched and torn), 0 = the last card (2020, like new).
+               The cards in between wear down step by step, in the order of the story. */
+            function cardAge(i, j) {
+                const total = SCENES.reduce((a, s) => a + s.cards.length, 0), before = SCENES.slice(0, i).reduce((a, s) => a + s.cards.length, 0);
+                return total > 1 ? 1 - (before + j) / (total - 1) : 0;
+            }
+            function seededRand(seed) {                       // same card, same scratches every time it is painted
+                let a = seed >>> 0;
+                return () => { a = (a + 0x6D2B79F5) >>> 0; let t = a; t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296 };
+            }
+            function ageCard(card, g, PW, PH) {
+                const k = card.age || 0, R = seededRand(card.seed);
+                if (k < .02) {                                        // like new: clean paper with a soft sheen
+                    g.save(); const sh = g.createLinearGradient(0, 0, PW, PH);
+                    sh.addColorStop(0, "rgba(255,255,255,0)"); sh.addColorStop(.5, "rgba(255,255,255,.10)"); sh.addColorStop(1, "rgba(255,255,255,0)");
+                    g.fillStyle = sh; g.fillRect(0, 0, PW, PH); g.restore(); return;
+                }
+                g.save();
+                /* yellowing: a warm tint, a little stronger toward the edges */
+                g.globalCompositeOperation = "multiply";
+                const warm = g.createRadialGradient(PW * .5, PH * .45, PW * .1, PW * .5, PH * .5, PW * .8);
+                warm.addColorStop(0, "rgba(240,222,180," + (.22 + .2 * k).toFixed(3) + ")");
+                warm.addColorStop(1, "rgba(180,130,70," + (.3 + .3 * k).toFixed(3) + ")");
+                g.fillStyle = warm; g.fillRect(0, 0, PW, PH);
+                g.globalCompositeOperation = "source-over";
+                /* soft foxing: blurred brown stains, not hard dots */
+                for (let i = 0, n = Math.round(3 + k * 6); i < n; i++) {
+                    const x = R() * PW, y = R() * PH, r = PW * (.05 + R() * .08 * k);
+                    const st = g.createRadialGradient(x, y, 0, x, y, r);
+                    st.addColorStop(0, "rgba(120,80,35," + (.08 + .16 * k * R()).toFixed(3) + ")"); st.addColorStop(1, "rgba(120,80,35,0)");
+                    g.fillStyle = st; g.beginPath(); g.arc(x, y, r, 0, Math.PI * 2); g.fill();
+                }
+                /* fine paper grain */
+                for (let i = 0, n = Math.round(500 + k * 1200); i < n; i++) {
+                    g.fillStyle = "rgba(90,60,30," + (R() * .08 * k).toFixed(3) + ")"; g.fillRect(R() * PW, R() * PH, 1.2, 1.2);
+                }
+                /* a few faint hairline scratches */
+                for (let i = 0, n = Math.round(k * 10); i < n; i++) {
+                    const x = R() * PW, y = R() * PH, L = 30 + R() * 90, a = (R() - .5) * .6;
+                    g.strokeStyle = "rgba(255,248,230," + (.08 + .12 * R()).toFixed(2) + ")"; g.lineWidth = .7;
+                    g.beginPath(); g.moveTo(x, y); g.lineTo(x + Math.cos(a) * L, y + Math.sin(a) * L); g.stroke();
+                }
+                /* one soft fold: a shadow line with a light edge beside it */
+                if (k > .3) {
+                    const y0 = PH * (.45 + R() * .1), tilt = (R() - .5) * 6;
+                    g.lineWidth = 2; g.strokeStyle = "rgba(80,55,25,.12)"; g.beginPath(); g.moveTo(0, y0); g.lineTo(PW, y0 + tilt); g.stroke();
+                    g.strokeStyle = "rgba(255,250,235,.18)"; g.beginPath(); g.moveTo(0, y0 + 2); g.lineTo(PW, y0 + tilt + 2); g.stroke();
+                }
+                /* torn edges: a notch in the border with fibres showing along the tear, not a drawn black line */
+                if (k > .45) {
+                    for (let c = 0, n = 1 + Math.round(k * 2.5); c < n; c++) {
+                        const side = Math.floor(R() * 4), horiz = side < 2, span = horiz ? PW : PH;
+                        const s0 = R() * span * .7, len = span * (.05 + R() * .08 * k), steps = 9, D = (6 + 12 * k) * (.6 + R() * .6);
+                        const at = (d, sv) => side === 0 ? [sv, d] : side === 1 ? [sv, PH - d] : side === 2 ? [d, sv] : [PW - d, sv];
+                        const outer = [], inner = [];
+                        for (let q = 0; q <= steps; q++) {
+                            const sv = s0 + len * q / steps;
+                            outer.push(at(0, sv)); inner.push(at(D * (.4 + R() * .8), sv));
+                        }
+                        g.beginPath(); outer.forEach((q, i) => i ? g.lineTo(q[0], q[1]) : g.moveTo(q[0], q[1]));
+                        for (let i = inner.length - 1; i >= 0; i--) g.lineTo(inner[i][0], inner[i][1]);
+                        g.closePath(); g.fillStyle = "rgba(60,38,16," + (.25 + .15 * k).toFixed(2) + ")"; g.fill();
+                        g.strokeStyle = "rgba(255,248,230,.45)"; g.lineWidth = 1; g.beginPath();
+                        inner.forEach((q, i) => i ? g.lineTo(q[0], q[1]) : g.moveTo(q[0], q[1])); g.stroke();
+                    }
+                }
+                g.restore();
             }
 
             /* ---------- CARDS & STACKS ----------
@@ -1151,6 +1222,7 @@
                     T.from.z + (T.to.z - T.from.z) * e + arc * T.lift);
                 m.rotation.set(.1 * arc, -Math.sign(dx) * .42 * arc, T.rz0 + (T.rz1 - T.rz0) * e);
                 m.scale.setScalar(1 + .05 * arc);
+                if (c.age > .3 && u < 1) m.rotation.z += (Math.random() - .5) * c.age * .03;   // old paper trembles as it is moved
                 if (u >= 1) { c.tw = null; m.position.copy(T.to); m.rotation.set(0, 0, T.rz1); m.scale.setScalar(1) }
             }
             function makeStack(data, i, home) {
@@ -1163,7 +1235,7 @@
                     const tex = new THREE.CanvasTexture(canvas); tex.anisotropy = 8;
                     const mat = new THREE.MeshStandardMaterial({ map: tex, roughness: .9, color: 0xffffff, side: THREE.DoubleSide });
                     const mesh = new THREE.Mesh(new THREE.PlaneGeometry(CARD_SIZE.w, CARD_SIZE.h), mat); world.add(mesh);
-                    const card = { st: st, j: j, info: info, canvas: canvas, g: canvas.getContext("2d"), tex: tex, mat: mat, mesh: mesh, photo: null, jit: j ? rnd(-.07, .07) : 0, tw: null };
+                    const card = { st: st, j: j, info: info, canvas: canvas, g: canvas.getContext("2d"), tex: tex, mat: mat, mesh: mesh, photo: null, age: cardAge(i, j), seed: (Math.random() * 1e9) | 0, jit: j ? rnd(-.07, .07) : 0, tw: null };
                     st.cards.push(card); cards.push(card); paintCard(card);
                     loadMedia(card);
                 });
@@ -1228,7 +1300,7 @@
             const clamp01 = x => Math.min(1, Math.max(0, x));
             const rndInt = (a, b) => Math.floor(rnd(a, b + 1));
             const ROOM = { dim: 0, target: 0 };       // room light: 0 = as set, 1 = dark (the blood screen dims the room)
-            const SHAKE = { amp: 0, on: false };      // screen shake in px ("shake" option)
+            const SHAKE = { amp: 0, on: false, cam: 0, off: new THREE.Vector3() };   // cam: camera shake in world units (moves the 3D view)      // screen shake in px ("shake" option)
             const FX = { token: 0, timers: [], runs: [], card: null, sfxWait: null };
             const BLOOD = { hi: "#9b1c1c", mid: "#611010", dark: "#2e0404" };
             const DECALS = ["decal1_0.png", "decal2_1.png", "decal_glb1.png", "decal_glb2.png"].map(src => { const im = new Image(); im.src = src; return im });
@@ -1298,6 +1370,8 @@
                     canvas.style.transform = ui.style.transform = `translate(${x.toFixed(1)}px, ${y.toFixed(1)}px)`;
                     SHAKE.amp *= Math.exp(-dt * 7); SHAKE.on = true;
                 } else if (SHAKE.on) { canvas.style.transform = ui.style.transform = ""; SHAKE.on = false; SHAKE.amp = 0 }
+                if (SHAKE.cam > .002) { SHAKE.off.set((Math.random() - .5) * 2 * SHAKE.cam, (Math.random() - .5) * 2 * SHAKE.cam, 0); SHAKE.cam *= Math.exp(-dt * 2.2) }
+                else { SHAKE.off.set(0, 0, 0); SHAKE.cam = 0 }
             }
 
             /* ---- thunder: synthesised (no sound file needed), a low rumble with a crack at the start ---- */
@@ -1433,19 +1507,19 @@
                 }
                 function reset() {
                     el.classList.remove("on"); el.style.opacity = ""; cam.style.transform = ""; cut.style.opacity = 0; dimEl.style.opacity = 0;
-                    blur.style.backdropFilter = blur.style.webkitBackdropFilter = "blur(0px)"; ROOM.target = 0; SHAKE.amp = 0;
+                    blur.style.backdropFilter = blur.style.webkitBackdropFilter = "blur(0px)"; ROOM.target = 0; SHAKE.amp = 0; SHAKE.cam = 0;
                     [fg, gg, sg].forEach(g => g.clearRect(0, 0, SW, SH));
                 }
                 el.style.opacity = ""; el.classList.add("on");
                 run.tick = now => {
                     if (t0 === null) { t0 = now; last = now }
                     const t = now - t0, dt = Math.min(.05, now - last); last = now;
-                    if (shake && !shook && t >= SHOT) { shook = true; SHAKE.amp = 9 }
+                    if (shake && !shook && t >= SHOT) { shook = true; SHAKE.cam = .7 }
 
                     /* camera: handheld sway, then the turn toward the silhouette */
                     const turn = easeInOutCubic(clamp01((t - 4.8) / 2.6));
                     const sway = Math.sin(t * 1.9) * .4 + Math.sin(t * 4.7) * .25 + (Math.random() - .5) * .3;
-                    const dx = Math.sin(t * 2.3) * 3 + (Math.random() - .5) * 2.2 - turn * SW * .02, dy = Math.cos(t * 1.7) * 2.4 + (Math.random() - .5) * 2.2;
+                    const dx = Math.sin(t * 2.3) * 3 + (Math.random() - .5) * 2.2 - turn * SW * .02 + SHAKE.cam * 25 * (Math.random() - .5), dy = Math.cos(t * 1.7) * 2.4 + (Math.random() - .5) * 2.2 + SHAKE.cam * 25 * (Math.random() - .5);
                     cam.style.transform = `scale(1.06) translate(${dx.toFixed(1)}px, ${dy.toFixed(1)}px) rotate(${(sway - turn * 4).toFixed(2)}deg)`;
 
                     /* each splat spreads out in slow motion as it lands, then stays on the glass */
@@ -1791,8 +1865,10 @@
                     cards.forEach(c => {
                         if (c.tw) stepTween(c, now);
                         const focused = c.st.spread && c.st.i === active && c.j === c.st.cur;
-                        const goal = c.st.shade * (focused ? 1 : .8), cur = c.mat.color.r;
+                        const goal = c.st.shade * (focused ? 1 : .8) * (1 - c.age * .05 * Math.random()), cur = c.mat.color.r;
                         c.mat.color.setScalar(cur + (goal - cur) * .05);
+                        /* the current card is always drawn on top of the red threads */
+                        if (c.mat.depthTest === focused) { c.mat.depthTest = !focused; c.mesh.renderOrder = focused ? 1 : 0 }
                     });
                     stacks.forEach(st => { st.pin.visible = true; st.pin.position.lerp(_pinGoal.copy(st.home).add(PIN_UP), .12) });
                     bgNow += ((ducking ? BG_DUCK : BG_FULL) - bgNow) * .04; syncMasterVolume();
@@ -1820,7 +1896,7 @@
                     lamp.intensity = Math.max(0, lampEnergy * warmAmt * flicker * faultMul(now) * (1 - ROOM.dim * .75));
                     lamp.position.lerp(lampGoal.pos, .05); lamp.target.position.lerp(lampGoal.target, .05);
                     stepDust(now, dt, Math.min(1, lamp.intensity / 2));
-                    renderer.render(world, camera);
+                    camera.position.add(SHAKE.off); camera.lookAt(lookNow); renderer.render(world, camera); camera.position.sub(SHAKE.off);
                 }
                 overview(); animate(); loadContent();
             }) ();

@@ -49,7 +49,7 @@
       }
     },
     {
-      "text": "In the Snelling family home, sixteen-year-old Beth wakes to find a man trying to take her from the house. Her father, Claude Snelling, rushes to help her. The attacker shoots him and flees.",
+      "text": "In the Snelling family home, sixteen-year-old Beth wakes to find a man trying to take her from the house. Her father, Claude Snelling, rushes to help her.",
       "scene": "s03-1",
       "delay": {
         "image": 0,
@@ -58,21 +58,21 @@
       }
     },
     {
-      "text": "Afterward: an open door, a family waiting for news from the hospital, and detectives trying to understand how a series of break-ins turned into murder.",
+      "text": "The attacker shoots him and flees.",
       "scene": "s03-2",
       "delay": {
         "image": 0,
         "video": 0,
-        "sound": 1.5
+        "sound": 1
       }
     },
     {
-      "text": "This is the first known murder in the Visalia series. Snelling was a college professor, killed after intervening to thwart an attempt to abduct his daughter. DeAngelo later admitted to the killing.",
+      "text": "This is the first known murder in the Visalia series. Snelling was a college professor, killed after intervening to thwart an attempt to abduct his daughter.",
       "scene": "s03-3",
       "delay": {
         "image": 0,
-        "video": 2,
-        "sound": 0
+        "video": 0,
+        "sound": 1.5
       }
     },
     {
@@ -96,7 +96,7 @@
       }
     },
     {
-      "text": "Months later, a series of attacks begins in the Sacramento area. The first known victim in this new series is attacked in her home. Police discover the incident is not isolated.",
+      "text": "Months later, a series of attacks begins in the Sacramento area. The first known victim in this new series is attacked in her home.",
       "scene": "s05-1",
       "delay": {
         "image": 0,
@@ -116,6 +116,16 @@
     {
       "text": "The nickname was assigned by investigators and the press; it was not the offender's known name. Detectives do not yet know the East Area Rapist may be the same person as the Visalia Ransacker.",
       "scene": "s05-3",
+      "delay": {
+        "image": 0,
+        "video": 2,
+        "sound": 0
+      }
+    },
+    {
+      "text": "In 1986, the killings stopped. No arrest, no confession, no explanation — the crimes simply ceased, and the reason remains unknown.",
+      "scene": "s05-4",
+      "caption": "Case file marked 1986",
       "delay": {
         "image": 0,
         "video": 2,
@@ -193,7 +203,7 @@
       }
     },
     {
-      "text": "After decades, the criminal had a name. But his name did not explain why he started, why he continued, or why his known crimes stopped after 1986.",
+      "text": "Finally.. after 44 years.",
       "scene": "s08-3",
       "caption": "Case file marked 2018",
       "delay": {
@@ -275,20 +285,8 @@
     },
     {
       "card": "s03-2",
-      "effect": "bloodScreen",
-      "delay": 3,
-      "repeat": 0,
-      "repeatMin": 1,
-      "repeatMax": 1,
-      "repeatGap": 0,
-      "options": {
-        "shake": true
-      }
-    },
-    {
-      "card": "s03-2",
       "effect": "bloodCard",
-      "delay": 4,
+      "delay": 2,
       "repeat": 0,
       "repeatMin": 1,
       "repeatMax": 1,
